@@ -96,7 +96,7 @@
 									   Grid.ColumnSpan="3"
 									   VerticalOptions="Center"
 									   VerticalTextAlignment="Center"
-									   HorizontalTextAlignment="End"
+									   HorizontalTextAlignment="Center"
 									   Text="{Binding DayInfo}">
 								</Label>
 							</Grid>

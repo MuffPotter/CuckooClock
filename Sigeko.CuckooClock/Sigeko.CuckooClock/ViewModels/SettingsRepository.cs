@@ -117,7 +117,7 @@ namespace Sigeko.CuckooClock.ViewModels
 				Intervall = 60,
 				IntervallTyp = 0,
 				WeekDays = new bool[7],
-				DayInfo = string.Empty,
+				//DayInfo = string.Empty,
 				Sound = "Standard",
 				SelectCommand = null,
 				DeleteCommand = null,

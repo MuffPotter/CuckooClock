@@ -14,6 +14,8 @@ namespace Sigeko.CuckooClock.Services
 
 		IEnumerable<IDevice> GetScannnedDevices();
 
+		IDevice ConnectedDevice();
+
 		event EventHandler<BluetoothService.DeviceEventArgs<IDevice>> DeviceDiscovered;
 
 		event EventHandler<BluetoothService.DeviceEventArgs<IDevice>> DeviceConnected;

@@ -18,6 +18,8 @@ namespace Sigeko.CuckooClock.Services
 	/// </summary>
 	public class BluetoothService : IBluetoothService
 	{
+		private bool _continueTimer;
+
 		private readonly IAdapter _bluetoothService;
 
 		private IList<IDevice> _devices;
@@ -45,7 +47,6 @@ namespace Sigeko.CuckooClock.Services
 			_bluetoothService.DeviceConnected += OnConnected;
 		}
 
-		private bool _continueTimer;
 		public void StartScanning()
 		{
 			Device.StartTimer(new TimeSpan(0,0,3), OnTimer);
@@ -101,6 +102,10 @@ namespace Sigeko.CuckooClock.Services
 			return _bluetoothService?.DiscoveredDevices;
 		}
 
+		public IDevice ConnectedDevice()
+		{
+			return DiscoveredDevices?.FirstOrDefault(l => l.State == DeviceState.Connected);
+		}
 
 		private void OnConnected(object sender, DeviceConnectionEventArgs eventArgs)
 		{

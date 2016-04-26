@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Xml.Serialization;
+using Sigeko.AppFramework.Helpers;
 
 namespace Sigeko.CuckooClock.Models
 {
@@ -60,14 +63,6 @@ namespace Sigeko.CuckooClock.Models
 			set { SetProperty(ref _weekDays, value); }
 		}
 
-		private string _dayInfo;
-
-		public string DayInfo
-		{
-			get { return _dayInfo; }
-			set { SetProperty(ref _dayInfo, value); }
-		}
-
 		private string _sound;
 
 		public string Sound
@@ -76,10 +71,53 @@ namespace Sigeko.CuckooClock.Models
 			set { SetProperty(ref _sound, value); }
 		}
 
+		//private string _dayInfo;
+
+		[XmlIgnore]
+		public string DayInfo
+		{
+			get
+			{
+				try
+				{
+					var count = WeekDays.ToList().Count(l => l.Equals(true));
+					if (count == 7)
+						return "Jeden Tag";
+					if (count == 2 && WeekDays[5] && WeekDays[6])
+						return "Am Wochenende";
+					if (count == 5 && !WeekDays[5] && !WeekDays[6])
+						return "Werktags";
+
+					var dayInfo = string.Empty;
+					for (var weekDay = 0; weekDay < WeekDays.Length; weekDay++)
+					{
+						if (WeekDays[weekDay] == false)
+							continue;
+
+						var enumValue = weekDay == 6 ? 0 : weekDay + 1;
+						var enumText = EnumHelper.GetEnum<DayOfWeek>(enumValue);
+						dayInfo += enumText.ToString().Substring(0, 3) + ", ";
+					}
+
+					if (string.IsNullOrEmpty(dayInfo) == false)
+						dayInfo = dayInfo.Substring(0, dayInfo.Length - 2);
+
+					return dayInfo;
+				}
+				catch (Exception exception)
+				{
+					var test = exception.Message;
+					return string.Empty;
+				}
+			}
+		}
+
+		[XmlIgnore]
 		public DateTime NextAlarm
 		{
 			get
 			{
+				//return DateTime.MaxValue;
 				if (IsActive == false)
 					return DateTime.MaxValue;
 
@@ -105,25 +143,31 @@ namespace Sigeko.CuckooClock.Models
 		/// <returns></returns>
 		private DateTime CalculatedNextAlarm(int weekDay)
 		{
-			// DayOfWeek: 1=Mo, 2=Di, 3=Mi, 4=Do, 5=Fr, 6=Sa, 7=So
-			var today = DateTime.Now;
-			var currentDay = (int)today.DayOfWeek;
-			var time = Time;
-
-			if (weekDay < currentDay)
-				time = time.Add(new TimeSpan(7, 0, 0, 0));
-
-			while (time < today.TimeOfDay)
+			try
 			{
-				time = time.Add(IntervallTyp == 0 
-					? new TimeSpan(0, Intervall, 0) 
-					: new TimeSpan(Intervall, 0, 0));
-			}
+				// DayOfWeek: 1=Mo, 2=Di, 3=Mi, 4=Do, 5=Fr, 6=Sa, 7=So
+				var today = DateTime.Now;
+				var currentDay = (int)today.DayOfWeek;
+				var time = Time;
 
-			var deltaDays = weekDay - currentDay;
-			//if (deltaDays < 0)
-			//	deltaDays += 7;
-			return today.Date.AddDays(deltaDays).Add(time);
+				if (weekDay < currentDay)
+					time = time.Add(new TimeSpan(7, 0, 0, 0));
+
+				while (time < today.TimeOfDay)
+				{
+					time = time.Add(IntervallTyp == 0
+						? new TimeSpan(0, Intervall, 0)
+						: new TimeSpan(Intervall, 0, 0));
+				}
+
+				var deltaDays = weekDay - currentDay;
+				return today.Date.AddDays(deltaDays).Add(time);
+			}
+			catch (Exception exception)
+			{
+				var test = exception.Message;
+				return DateTime.MaxValue;
+			}
 		}
 	}
 }

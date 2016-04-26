@@ -5,6 +5,7 @@ using System.Windows.Input;
 using BluetoothLE.Core;
 using Sigeko.AppFramework.Commands;
 using Sigeko.AppFramework.Navigation;
+using Sigeko.CuckooClock.Common;
 using Sigeko.CuckooClock.Services;
 using Xamarin.Forms;
 
@@ -105,80 +106,110 @@ namespace Sigeko.CuckooClock.ViewModels
 			set { SetProperty(ref _nextPageCommand, value); }
 		}
 
-		private async void ExecuteNextPageCommand(object parameter)
+		private static async void ExecuteNextPageCommand(object parameter)
 		{
-			if (parameter == null || (string)parameter == "Bluetooth")
+			if (parameter == null || (string) parameter == "Bluetooth")
+			{
 				await NavigationService.Current.PushAsync(new MainViewModel(0));
-			else
+			}
+			else if ((string) parameter == "Alarm")
+			{
 				await NavigationService.Current.PushAsync(new MainViewModel(1));
+			}
 		}
 
 		#endregion commands
 
 		#region methods private
 
-		private async Task GetSettings()
+		private async void GetSettings()
 		{
 			// Create settings repository
 			var settingsRepositoryy = new SettingsRepository();
 
-			// Read some configuration settings
+			// Read configuration settings
 			App.Settings = await settingsRepositoryy.ReadSettings();
 
+			// Alarm und Device Informationen holen
 			NextAlarmInfo = GetNextAlarm();
 			CurrentDevice = GetCurrentBluetoothDevice();
 		}
 
+		/// <summary>
+		/// Ermittelt den Text für den nächsten Alarm
+		/// </summary>
+		/// <returns>Den zusammengestellten Text</returns>
 		private string GetNextAlarm()
 		{
-			var alarms = _alarmRepository.ReadAlarmList();
-			if (alarms != null && alarms.Any() == true)
+			// Konstante für: Keinen Alarm gefunden
+			const string message = "Kein Alarm eingestellt!";
+
+			try
 			{
+				// Alle eingestellten Alarme holen
+				var alarms = _alarmRepository.ReadAlarmList();
+				if (alarms == null || alarms.Any() == false)
+					return message;
+
+				// Sortieren, aufsteigend nach dem Zeitpunkt
 				var alarm = alarms.OrderBy(l => l.NextAlarm).FirstOrDefault();
 				if (alarm == null)
-					return "Kein Alarm eingestellt!";
+					return message;
 
+				// Ist der Alarm überhaupt zutreffend?
 				var nextAlarm = alarm.NextAlarm;
 				if (nextAlarm == DateTime.MaxValue)
-					return "Kein Alarm eingestellt!";
+					return message;
 
+				// Text zusammentellen
+				// Alarmbezeichnung
+				// Zeitpunkt: Mittwoch, 24.06.2016, 14:15
 				var textMessage = alarm.Name + Environment.NewLine +
-				                  nextAlarm.ToString("f") + Environment.NewLine;
+								  nextAlarm.ToString("f") + Environment.NewLine;
 
+				// Nun die Tage, Stunden, Minuten bestimmen
+				var textInfo = string.Empty;
 				var delta = nextAlarm - DateTime.Now;
 				var days = (int)delta.TotalDays;
 				var hours = (int)delta.TotalHours - days * 24;
 				var minutes = (int)delta.TotalMinutes - days * 24 * 60 - hours * 60;
+
 				if (days > 0)
 				{
-					textMessage += $"in {days} Tagen ";
+					textInfo += $"{days} Tagen";
 					if (hours > 0)
-						textMessage += $"{hours} Stunden ";
+						textInfo += $" {hours} Stunden ";
 				}
-				else if (delta.TotalMinutes > 60)
+				else if (hours > 0)
 				{
-					textMessage += $"in {hours} Stunden ";
+					textInfo += $"{hours} Stunden";
 				}
 
 				if (minutes > 0)
 				{
-					textMessage += $"{minutes} Minuten";
+					textInfo += $" {minutes} Minuten";
 				}
 
-				return textMessage;
+				if (string.IsNullOrEmpty(textInfo) == false)
+					textInfo = "in " + textInfo;
 
-				//foreach (var alarm in alarms)
-				//{
-				//	var nextAlarm = alarm.NextAlarm;
-				//}
+				// Text zurückgeben
+				return textMessage + textInfo;
 			}
-
-			return "Kein Alarm eingestellt!";
+			catch (Exception exception)
+			{
+				Logger.Current.LogException(exception);
+				return "";
+			}
 		}
 
+		/// <summary>
+		/// Ermittelt das aktuell verbundene Bluetooth Device
+		/// </summary>
+		/// <returns>Null, wenn kein Gerät verbunden, sonst das Gerät</returns>
 		private IDevice GetCurrentBluetoothDevice()
 		{
-			var device = _bluetoothService?.GetScannnedDevices()?.FirstOrDefault();
+			var device = _bluetoothService?.ConnectedDevice();
 			return device;
 		}
 
