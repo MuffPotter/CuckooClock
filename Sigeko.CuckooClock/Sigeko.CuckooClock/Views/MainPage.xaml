@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseTabbedPage x:Class="Sigeko.CuckooClock.Views.MainPage"
+					  xmlns="http://xamarin.com/schemas/2014/forms"
+					  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+					  xmlns:views="clr-namespace:Sigeko.CuckooClock.Views;assembly=Sigeko.CuckooClock"
+					  Title="Main Page"
+					  ActiveView="{Binding ActiveView}">
+
+	<TabbedPage.Children>
+
+		<!-- https://www.syntaxismyui.com/xamarin-forms-tabbedpage-navigation-recipe/ -->
+		<!-- https://github.com/XLabs/Xamarin-Forms-Labs/wiki/ExtendedTabbedPage -->
+		<views:BluetoothPage Title="Bluetooth" Icon="Pages/Bluetooth.png" />
+		<views:AlarmPage Title="Alarme" Icon="Pages/Alarm.png" />
+		<!--<views:BluetoothPage Title="Bluetooth" Icon="{x:Static res:Images.Bluetooth}" />
+		<views:AlarmPage Title="Alarme" Icon="{x:Static res:Images.Bluetooth}" />-->
+
+	</TabbedPage.Children>
+	
+</views:BaseTabbedPage>

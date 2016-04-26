@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage x:Name="Page1"
+				x:Class="Sigeko.CuckooClock.Views.BluetoothPage"
+				xmlns="http://xamarin.com/schemas/2014/forms"
+				xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+				xmlns:views="clr-namespace:Sigeko.CuckooClock.Views;assembly=Sigeko.CuckooClock"
+				xmlns:controls="clr-namespace:Sigeko.CuckooClock.Controls;assembly=Sigeko.CuckooClock"
+				xmlns:res="clr-namespace:Sigeko.CuckooClock.Assets;assembly=Sigeko.CuckooClock"
+				xmlns:extensions="clr-namespace:Sigeko.CuckooClock.Extensions;assembly=Sigeko.CuckooClock"
+				xmlns:converters="clr-namespace:Sigeko.CuckooClock.Converters;assembly=Sigeko.CuckooClock"
+				Title="Bluetooth Geräte">
+
+	<views:BasePage.Resources>
+		<ResourceDictionary>
+			<converters:ImageSourceConverter x:Key="ConvertImageSource" />
+		</ResourceDictionary>
+	</views:BasePage.Resources>
+
+	
+	<views:BasePage.ToolbarItems>
+		<ToolbarItem x:Name="ScanAllButton"
+					 Order="Primary"
+					 Priority="0"
+					 Icon="Pages/Bluetooth.png"
+					 Command="{Binding ScanDevicesCommand}"/>
+	</views:BasePage.ToolbarItems>
+
+	<Grid x:Name="MainGrid"
+		  RowSpacing="0"
+		  ColumnSpacing="0"
+		  BackgroundColor="{x:Static res:ColorResources.ViewBackgroundColor}">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="10" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="10" />
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="10"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="10"/>
+		</Grid.ColumnDefinitions>
+
+		<StackLayout Grid.Row="1"
+					 Grid.Column="1">
+
+			<ProgressBar IsVisible="{Binding IsScanning}" Progress="{Binding ProgressValue}">
+			</ProgressBar>
+			
+			<Grid VerticalOptions="Start">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Label Text="{Binding DeviceList.Count, StringFormat = Anzahl Geräte: '{0}'}">
+				</Label>
+				<Button Grid.Column="1" 
+						IsVisible="{Binding IsScanning}"
+						Text="Stop"
+						Command="{Binding StopScanCommand}"></Button>
+			</Grid>
+				
+			<ListView x:Name="DeviceListView"
+					  ItemsSource="{Binding DeviceList}"
+					  HasUnevenRows = "True"
+					  RowHeight="-1">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<ViewCell.ContextActions>
+								<MenuItem Command="{Binding SelectCommand}" 
+										  CommandParameter="{Binding .}"
+								   Text="Verbinden" />
+							</ViewCell.ContextActions>
+							
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<StackLayout Grid.Row="0"
+											 Grid.Column="0">
+									<Label Text="{Binding Name}" />
+									<Label Text="{Binding Id, StringFormat = '{0}'}"
+										   FontSize="12"/>
+								</StackLayout>
+								<!--<Image Grid.Row="0"
+									   Grid.Column="1"
+									   HeightRequest="33"
+									   VerticalOptions="Center"
+									   Source="{extensions:ImageResource Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth50.png}">
+								</Image>-->
+								<Image Grid.Row="0"
+									   Grid.Column="1"
+									   HeightRequest="33"
+									   VerticalOptions="Center"
+									   Source="{Binding ImageSource, Converter={StaticResource ConvertImageSource}}">
+								</Image>
+							</Grid>
+
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+
+		</StackLayout>
+
+	</Grid>
+
+</views:BasePage>

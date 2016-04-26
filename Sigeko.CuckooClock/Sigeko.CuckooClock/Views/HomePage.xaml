@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage x:Class="Sigeko.CuckooClock.Views.HomePage"
+				xmlns="http://xamarin.com/schemas/2014/forms"
+				xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+				xmlns:views="clr-namespace:Sigeko.CuckooClock.Views;assembly=Sigeko.CuckooClock"
+				xmlns:ctrl="clr-namespace:Sigeko.CuckooClock.Controls;assembly=Sigeko.CuckooClock"
+				xmlns:res="clr-namespace:Sigeko.CuckooClock.Assets;assembly=Sigeko.CuckooClock"
+				xmlns:ext="clr-namespace:Sigeko.CuckooClock.Extensions;assembly=Sigeko.CuckooClock"
+				Title="Cuckoo Clock">
+
+	<Grid x:Name="MainGrid"
+		  RowSpacing="0"
+		  ColumnSpacing="0"
+		  BackgroundColor="{x:Static res:ColorResources.ViewBackgroundColor}">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="10" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="10" />
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="10"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="10"/>
+		</Grid.ColumnDefinitions>
+
+		<StackLayout Grid.Row="1"
+					 Grid.Column="1"
+					 VerticalOptions="FillAndExpand">
+
+			<Image VerticalOptions="Center"
+				   Source="{ext:ImageResource Sigeko.CuckooClock.Assets.Images.Icons.Alarm50.png}">
+			</Image>
+			<Label HorizontalOptions="CenterAndExpand"
+				   HorizontalTextAlignment="Center"
+				   Text="Nächster Alarm"
+				   FontSize="28" >
+			</Label>
+			<Label HorizontalOptions="CenterAndExpand"
+				   HorizontalTextAlignment="Center"
+				   Text="{Binding NextAlarmInfo}" >
+			</Label>
+			<ctrl:AppButton Text="Alarm Einstellungen"
+								AppButtonType="Default"
+								Command="{Binding NextPageCommand}"
+								CommandParameter="Alarm">
+			</ctrl:AppButton>
+
+			<Image VerticalOptions="Center"
+				   Source="{ext:ImageResource Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth50.png}">
+			</Image>
+			<Label HorizontalOptions="CenterAndExpand"
+				   HorizontalTextAlignment="Center"
+				   Text="Verbunden mit:"
+				   FontSize="28" >
+			</Label>
+			<Label HorizontalOptions="CenterAndExpand"
+				   HorizontalTextAlignment="Center"
+				   Text="{Binding BluetoothInfo}" >
+			</Label>
+			<ctrl:AppButton Text="Bluetooth Geräte"
+								AppButtonType="Default"
+								Command="{Binding NextPageCommand}"
+								CommandParameter="Bluetooth">
+			</ctrl:AppButton>
+
+			<ctrl:AppButton VerticalOptions="End"
+							Text="Nur zum Test"
+							AppButtonType="Default"
+							Command="{Binding TestCommand}">
+			</ctrl:AppButton>
+
+		</StackLayout>
+
+	</Grid>
+
+</views:BasePage>

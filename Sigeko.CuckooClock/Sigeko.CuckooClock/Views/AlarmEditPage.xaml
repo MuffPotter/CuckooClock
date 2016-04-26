@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage x:Class="Sigeko.CuckooClock.Views.AlarmEditPage"
+				xmlns="http://xamarin.com/schemas/2014/forms"
+				xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+				xmlns:views="clr-namespace:Sigeko.CuckooClock.Views;assembly=Sigeko.CuckooClock"
+				xmlns:res="clr-namespace:Sigeko.CuckooClock.Assets;assembly=Sigeko.CuckooClock"
+				xmlns:ctrl="clr-namespace:Sigeko.CuckooClock.Controls;assembly=Sigeko.CuckooClock"
+				Title="{Binding PageTitel}">
+
+	<views:BasePage.ToolbarItems>
+		<ToolbarItem x:Name="SaveAlarmButton"
+					 Order="Primary"
+					 Priority="0"
+					 Text="Save"
+					 Command="{Binding SaveAlarmCommand}"/>
+		<ToolbarItem x:Name="DeleteAlarmButton"
+					 Order="Primary"
+					 Priority="0"
+					 Text="Delete"
+					 Command="{Binding DeleteAlarmCommand}"/>
+	</views:BasePage.ToolbarItems>
+
+	<Grid x:Name="MainGrid"
+		  RowSpacing="0"
+		  ColumnSpacing="0"
+		  BackgroundColor="{x:Static res:ColorResources.ViewBackgroundColor}">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="10" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="10" />
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="10"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="10"/>
+		</Grid.ColumnDefinitions>
+
+		<ScrollView Grid.Row="1"
+					Grid.Column="1"
+					Orientation="Vertical"
+					VerticalOptions="Start">
+
+			<StackLayout Spacing="10">
+				<Grid IsVisible="False">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="2*"/>
+						<ColumnDefinition Width="8*"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Column="0" HorizontalTextAlignment="End" Text="Id:" >
+					</Label>
+					<ctrl:EntryEx Grid.Column="1" Text="{Binding Alarm.Id}">
+					</ctrl:EntryEx>
+				</Grid>
+				<Grid ColumnSpacing="5">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="40" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="2*"/>
+						<ColumnDefinition Width="8*"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Column="0" HorizontalTextAlignment="End" Text="Name:" >
+					</Label>
+					<ctrl:EntryEx Grid.Column="1" Text="{Binding Alarm.Name}">
+					</ctrl:EntryEx>
+				</Grid>
+				<Grid ColumnSpacing="5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="2*"/>
+						<ColumnDefinition Width="8*"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="End" Text="Aktiv:" >
+					</Label>
+					<Switch Grid.Column="1" HorizontalOptions="Start" IsToggled="{Binding Alarm.IsActive}">
+					</Switch>
+				</Grid>
+				<Grid ColumnSpacing="5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="22*"/>
+						<ColumnDefinition Width="22*"/>
+						<ColumnDefinition Width="14*"/>
+						<ColumnDefinition Width="13*"/>
+						<ColumnDefinition Width="30*"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Column="0" HorizontalTextAlignment="End" Text="Zeit:" >
+					</Label>
+					<TimePicker Grid.Column="1" Time="{Binding Alarm.Time}" Format="HH:mm">
+					</TimePicker>
+					<Label Grid.Column="2" HorizontalTextAlignment="End" Text="Alle:" >
+					</Label>
+					<ctrl:EntryEx Grid.Column="3" Keyboard="Numeric" Text="{Binding Alarm.Intervall}">
+					</ctrl:EntryEx>
+					<Picker Grid.Column="4" SelectedIndex="{Binding Alarm.IntervallTyp}" >
+						<Picker.Items>
+							<x:String>Minuten</x:String>
+							<x:String>Stunden</x:String>
+						</Picker.Items>
+					</Picker>
+				</Grid>
+				<Grid IsVisible="False">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="2*"/>
+						<ColumnDefinition Width="8*"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Column="0" HorizontalTextAlignment="End" Text="Alle:" >
+					</Label>
+					<ctrl:EntryEx Grid.Column="1" Keyboard="Numeric" Text="{Binding Alarm.Intervall}">
+					</ctrl:EntryEx>
+				</Grid>
+				<Grid ColumnSpacing="5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="2*"/>
+						<ColumnDefinition Width="8*"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Column="0"
+						   VerticalOptions="Start"
+						   VerticalTextAlignment="Start"
+						   HorizontalTextAlignment="End"
+						   Text="Tage:" >
+					</Label>
+					<StackLayout Grid.Column="1">
+						<Grid ColumnSpacing="0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="1*"/>
+								<ColumnDefinition Width="1*"/>
+								<ColumnDefinition Width="1*"/>
+								<ColumnDefinition Width="1*"/>
+							</Grid.ColumnDefinitions>
+							<ctrl:CheckBox Grid.Column="0" DefaultText="Mo" CheckedText="Mo" UncheckedText="Mo" Checked="{Binding Alarm.WeekDays[0]}" />
+							<ctrl:CheckBox Grid.Column="1" DefaultText="Di" CheckedText="Di" UncheckedText="Di" Checked="{Binding Alarm.WeekDays[1]}" />
+							<ctrl:CheckBox Grid.Column="2" DefaultText="Mi" CheckedText="Mi" UncheckedText="Mi" Checked="{Binding Alarm.WeekDays[2]}" />
+							<ctrl:CheckBox Grid.Column="3" DefaultText="Do" CheckedText="Do" UncheckedText="Do" Checked="{Binding Alarm.WeekDays[3]}" />
+						</Grid>
+						<Grid ColumnSpacing="0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="1*"/>
+								<ColumnDefinition Width="1*"/>
+								<ColumnDefinition Width="1*"/>
+								<ColumnDefinition Width="1*"/>
+							</Grid.ColumnDefinitions>
+							<ctrl:CheckBox Grid.Column="0" DefaultText="Fr" CheckedText="Fr" UncheckedText="Fr" Checked="{Binding Alarm.WeekDays[4]}" />
+							<ctrl:CheckBox Grid.Column="1" DefaultText="Sa" CheckedText="Sa" UncheckedText="Sa" Checked="{Binding Alarm.WeekDays[5]}" />
+							<ctrl:CheckBox Grid.Column="2" DefaultText="So" CheckedText="So" UncheckedText="So" Checked="{Binding Alarm.WeekDays[6]}" />
+						</Grid>
+					</StackLayout>
+				</Grid>
+				<Grid ColumnSpacing="5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="2*"/>
+						<ColumnDefinition Width="6*"/>
+						<ColumnDefinition Width="2*"/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Column="0"
+						   HorizontalTextAlignment="End"
+						   Text="Sound:" >
+					</Label>
+					<ctrl:EntryEx Grid.Column="1"
+								  Text="{Binding Alarm.Sound}">
+					</ctrl:EntryEx>
+					<ctrl:AppButton Grid.Column="2"
+									Padding="0"
+									HeightRequest="20"
+									BackgroundColor="White"
+									Text="..."
+									AppButtonType="Default"
+									Command="{Binding TestCommand}">
+					</ctrl:AppButton>
+				</Grid>
+			</StackLayout>
+
+		</ScrollView>
+
+	</Grid>
+
+</views:BasePage>

@@ -1,0 +1,68 @@
+﻿<Application x:Class="Sigeko.CuckooClock.App"
+			 xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:res="clr-namespace:Sigeko.CuckooClock.Assets;assembly=Sigeko.CuckooClock"
+			 xmlns:ctrl="clr-namespace:Sigeko.CuckooClock.Controls;assembly=Sigeko.CuckooClock"
+			 xmlns:converters="clr-namespace:Sigeko.CuckooClock.Converters;assembly=Sigeko.CuckooClock">
+
+	<!-- https://developer.xamarin.com/guides/xamarin-forms/user-interface/styles/application/ -->
+	<Application.Resources>
+
+		<OnPlatform x:Key="OnPlatformResourceDictionary" x:TypeArguments="ResourceDictionary">
+
+			<!-- iOS Styles-->
+			<OnPlatform.iOS>
+
+				<ResourceDictionary>
+
+					<!-- Label Font: Apple SD Gothic Neo -->
+					<Style TargetType="Label">
+						<Setter Property="VerticalOptions" Value="Center" />
+						<Setter Property="VerticalTextAlignment" Value="Center" />
+						<Setter Property="TextColor" Value="{x:Static res:ColorResources.LabelTextColor}" />
+						<Setter Property="FontFamily" Value="Apple SD Gothic Neo" />
+						<Setter Property="FontSize" Value="{x:Static res:FontResources.LabelFontSize}" />
+					</Style>
+					<!--<Style x:Key="HeaderLabelStyle" TargetType="Label" BasedOn="{StaticResource BaseLabelStyle}">
+						<Setter Property="FontSize" Value="{x:Static res:FontResources.PageHeaderFontSize}" />
+						<Setter Property="FontAttributes" Value="Bold" />
+					</Style>-->
+
+					<!-- Button Font: Apple SD Gothic Neo -->
+					<Style TargetType="Button">
+						<Setter Property="TextColor" Value="{x:Static res:ColorResources.ButtonTextColor}" />
+						<Setter Property="FontFamily" Value="Apple SD Gothic Neo" />
+						<Setter Property="FontSize" Value="{x:Static res:FontResources.LabelFontSize}" />
+					</Style>
+
+					<!-- Switch Font: Apple SD Gothic Neo -->
+					<Style TargetType="Switch">
+						<Setter Property="Scale" Value="0.75" />
+					</Style>
+
+					<!-- CheckBox Font: Apple SD Gothic Neo -->
+					<Style TargetType="{x:Type ctrl:CheckBox}">
+						<Setter Property="TextColor" Value="{x:Static res:ColorResources.ButtonTextColor}" />
+						<Setter Property="FontSize" Value="{x:Static res:FontResources.CheckBoxFontSize}" />
+						<Setter Property="HorizontalOptions" Value="FillAndExpand" />
+						<Setter Property="TranslationX" Value="-4" />
+						<Setter Property="Scale" Value="1" />
+					</Style>
+					<!--<Style TargetType="{x:Type ctrl:CheckBox}">
+						<Setter Property="TextColor" Value="{x:Static res:ColorResources.ButtonTextColor}" />
+						<Setter Property="FontSize" Value="{x:Static res:FontResources.CheckBoxFontSize}" />
+						<Setter Property="VerticalOptions" Value="Center" />
+						<Setter Property="TranslationX" Value="0" />
+						<Setter Property="HorizontalOptions" Value="FillAndExpand" />
+						<Setter Property="Scale" Value="1" />
+					</Style>-->
+
+				</ResourceDictionary>
+
+			</OnPlatform.iOS>
+
+		</OnPlatform>
+
+	</Application.Resources>
+
+</Application>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentView x:Class="Sigeko.CuckooClock.Controls.ImageButton"
+      xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:res="clr-namespace:Sigeko.CuckooClock.Assets;assembly=Sigeko.CuckooClock"
+	  Padding="0">
+
+	<Grid Padding="0">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="115" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="10"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<Image x:Name ="Image"
+			   Grid.Column="0" />
+
+		<Label x:Name="LabelText"
+			   Grid.Column="2"
+			   VerticalOptions="Center"
+			   HorizontalOptions="Start"
+			   HorizontalTextAlignment="Start"
+			   VerticalTextAlignment="Center"
+			   TextColor="{x:Static res:ColorResources.MainGray}"
+			   FontAttributes="Bold"
+			   FontSize="{x:Static res:FontResources.RoundImageFontSize}"
+			   Text="Sigeko" />
+
+	</Grid>
+
+</ContentView>

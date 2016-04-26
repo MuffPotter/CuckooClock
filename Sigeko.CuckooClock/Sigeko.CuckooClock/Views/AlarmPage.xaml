@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage x:Class="Sigeko.CuckooClock.Views.AlarmPage"
+				xmlns="http://xamarin.com/schemas/2014/forms"
+				xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+				xmlns:views="clr-namespace:Sigeko.CuckooClock.Views;assembly=Sigeko.CuckooClock"
+				xmlns:ctrl="clr-namespace:Sigeko.CuckooClock.Controls;assembly=Sigeko.CuckooClock"
+				xmlns:res="clr-namespace:Sigeko.CuckooClock.Assets;assembly=Sigeko.CuckooClock"
+				Title="Alarm Einstellungen">
+
+	<views:BasePage.ToolbarItems>
+		<ToolbarItem x:Name="AddAlarmButton"
+					 Order="Primary"
+					 Priority="0"
+					 Text="Add"
+					 Command="{Binding AddAlarmCommand}" />
+		
+	</views:BasePage.ToolbarItems>	<Grid x:Name="MainGrid"
+		  RowSpacing="0"
+		  ColumnSpacing="0"
+		  BackgroundColor="{x:Static res:ColorResources.ViewBackgroundColor}">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="10" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="10" />
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="10"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="10"/>
+		</Grid.ColumnDefinitions>
+
+		<StackLayout Grid.Row="1"
+					 Grid.Column="1">
+
+			<Grid VerticalOptions="Start">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Label Text="{Binding AlarmList.Count, StringFormat = Anzahl der Alarme: '{0}'}">
+				</Label>
+				<Button Grid.Column="1"
+						Text="Add"
+						Command="{Binding AddAlarmCommand}"></Button>
+			</Grid>
+
+			<ListView x:Name="AlarmListView"
+					  ItemsSource="{Binding AlarmList}"
+					  HasUnevenRows = "True"
+					  RowHeight="-1">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<ViewCell.ContextActions>
+								<MenuItem Command="{Binding SelectCommand}"
+										  CommandParameter="{Binding .}"
+								   Text="Bearbeiten" />
+								<MenuItem Command="{Binding DeleteCommand}"
+										  CommandParameter="{Binding .}"
+										  IsDestructive="True"
+								   Text="Löschen" />
+							</ViewCell.ContextActions>
+							<Grid VerticalOptions="Center"
+								  Padding="5,5,5,0">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<ctrl:EntryEx Grid.Row="0"
+											  Grid.Column="0"
+											  VerticalOptions="Center"
+											  Text="{Binding Name}">
+								</ctrl:EntryEx>
+								<TimePicker Grid.Row="0"
+											Grid.Column="1"
+											VerticalOptions="Center"
+											WidthRequest="65"
+											Time="{Binding Time}" 
+											Format="HH:mm">
+								</TimePicker>
+								<Switch Grid.Row="0"
+										Grid.Column="2"
+										VerticalOptions="Center"
+										IsToggled="{Binding IsActive}">
+								</Switch>
+								<Label Grid.Row="1"
+									   Grid.Column="0"
+									   Grid.ColumnSpan="3"
+									   VerticalOptions="Center"
+									   VerticalTextAlignment="Center"
+									   HorizontalTextAlignment="End"
+									   Text="{Binding DayInfo}">
+								</Label>
+							</Grid>
+
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+
+		</StackLayout>
+
+	</Grid>
+
+</views:BasePage>

@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<views:BasePopUpPage x:Class="Sigeko.CuckooClock.Views.ImagePopUpPage"
+					 xmlns="http://xamarin.com/schemas/2014/forms"
+					 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+					 xmlns:views="clr-namespace:Sigeko.CuckooClock.Views;assembly=Sigeko.CuckooClock"
+					 xmlns:controls="clr-namespace:Sigeko.CuckooClock.Controls;assembly=Sigeko.CuckooClock"
+					 xmlns:res="clr-namespace:Sigeko.CuckooClock.Assets;assembly=Sigeko.CuckooClock"
+					 IsAnimating="True"
+					 IsBackgroundAnimating="True"
+					 AnimationName="ScaleCenterUp">
+
+	<Grid x:Name="RootGrid"
+		  BackgroundColor="Transparent"
+		  InputTransparent="False"
+		  Padding="0">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="20"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="20"/>
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="20"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="20"/>
+		</Grid.ColumnDefinitions>
+
+		<!-- Content -->
+		<Grid x:Name="PopUpGrid"
+			  Grid.Row="1"
+			  Grid.Column="1"
+			  VerticalOptions="CenterAndExpand"
+			  HorizontalOptions="CenterAndExpand"
+			  BackgroundColor="Transparent"
+			  InputTransparent="False"
+			  Padding="0">
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="20"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="10"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="20"/>
+			</Grid.RowDefinitions>
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="20"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="20"/>
+			</Grid.ColumnDefinitions>
+
+			<controls:RoundedBoxView x:Name="BoxView"
+									 Grid.Row="0"
+									 Grid.RowSpan="5"
+									 Grid.Column="0"
+									 Grid.ColumnSpan="3"
+									 FillColor="White"
+									 InputTransparent="True"
+									 IsEnabled="False"
+									 CornerRadius="10">
+			</controls:RoundedBoxView>
+
+			<!-- SubHeader -->
+			<Label Grid.Row="1"
+				   Grid.Column="1"
+				   VerticalOptions="Start"
+				   HorizontalOptions="Start"
+				   Text="{Binding HeaderText}"
+				   TextColor="{x:Static res:ColorResources.MainYellow}"
+				   FontSize="{x:Static res:FontResources.PopUpHeaderFontSize}"
+				   FontAttributes="Bold"
+				   LineBreakMode="NoWrap"/>
+
+			<!-- Close Button -->
+			<StackLayout Grid.Row="0"
+						 Grid.RowSpan="2"
+						 Grid.Column="1"
+						 Grid.ColumnSpan="2"
+						 VerticalOptions="Start"
+						 HorizontalOptions="End"
+						 Padding="5">
+				<Button x:Name="CloseButton"
+						Command="{Binding ClosePopUpCommand}"
+						Text="X"
+						TextColor="{x:Static res:ColorResources.MainYellow}"
+						FontSize="{x:Static res:FontResources.PopUpCloseButtonFontSize}"
+						FontAttributes="Bold">
+				</Button>
+			</StackLayout>
+
+			<!-- Bild -->
+			<Image Grid.Row="3"
+				   Grid.Column="1"
+				   VerticalOptions="FillAndExpand"
+				   HorizontalOptions="Start"
+				   Aspect="AspectFill"
+				   Source="{Binding ImageSource}">
+			</Image>
+
+		</Grid>
+
+	</Grid>
+
+</views:BasePopUpPage>
