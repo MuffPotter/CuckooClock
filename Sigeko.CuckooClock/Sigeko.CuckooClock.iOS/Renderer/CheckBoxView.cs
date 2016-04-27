@@ -86,8 +86,8 @@ namespace Sigeko.CuckooClock.iOS.Renderer
 		/// </summary>
 		void ApplyStyle()
 		{
-			SetImage(UIImage.FromBundle("Images/Checkbox/checked_checkbox.png"), UIControlState.Selected);
-			SetImage(UIImage.FromBundle("Images/Checkbox/unchecked_checkbox.png"), UIControlState.Normal);
+			SetImage(UIImage.FromBundle("Controls/Checkbox/checked_checkbox.png"), UIControlState.Selected);
+			SetImage(UIImage.FromBundle("Controls/Checkbox/unchecked_checkbox.png"), UIControlState.Normal);
 		}
 	}
 }

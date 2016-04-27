@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using BluetoothLE.Core;
 using BluetoothLE.iOS;
 using Foundation;
+using MetroLog;
+using MetroLog.Targets;
 using Sigeko.AppFramework.Services;
+using Sigeko.CuckooClock.Common;
 using Sigeko.CuckooClock.iOS.Services;
 using UIKit;
 
@@ -72,6 +76,11 @@ namespace Sigeko.CuckooClock.iOS
 			App.ScreenSize = new Size((int)uiScreen.Width, (int)uiScreen.Height);
 			App.ScreenScale = UIScreen.MainScreen.Scale;
 
+			// Same Code for iOS and Android
+			//InitIoc();
+			InitLogging();
+			//InitDevice(options);
+
 			_mainApp = new App();
 			LoadApplication(_mainApp);
 
@@ -133,6 +142,28 @@ namespace Sigeko.CuckooClock.iOS
 
 			var systemFont = UIFont.SystemFontOfSize(18);
 			return systemFont.FamilyName;
+		}
+
+		/// <summary>
+		/// Same Code for iOS and Android
+		/// </summary>
+		private static void InitLogging()
+		{
+			try
+			{
+				var settings = LogManagerFactory.CreateLibraryDefaultSettings();
+				var target = new TraceTarget();
+
+				settings.AddTarget(LogLevel.Debug, LogLevel.Fatal, target);
+				settings.IsEnabled = true;
+
+				Logger.Current.StartLogging(settings);
+				Logger.Current.LogInfo(() => "InitLogging()");
+			}
+			catch (Exception exception)
+			{
+				Debug.WriteLine("InitLogging", exception.Message);
+			}
 		}
 	}
 }

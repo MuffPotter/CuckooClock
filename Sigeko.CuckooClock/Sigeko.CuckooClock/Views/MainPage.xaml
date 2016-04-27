@@ -10,8 +10,8 @@
 
 		<!-- https://www.syntaxismyui.com/xamarin-forms-tabbedpage-navigation-recipe/ -->
 		<!-- https://github.com/XLabs/Xamarin-Forms-Labs/wiki/ExtendedTabbedPage -->
-		<views:BluetoothPage Title="Bluetooth" Icon="Pages/Bluetooth.png" />
-		<views:AlarmPage Title="Alarme" Icon="Pages/Alarm.png" />
+		<views:BluetoothPage Title="Bluetooth" Icon="Icons/Bluetooth.png" />
+		<views:AlarmPage Title="Alarme" Icon="Icons/Alarm.png" />
 		<!--<views:BluetoothPage Title="Bluetooth" Icon="{x:Static res:Images.Bluetooth}" />
 		<views:AlarmPage Title="Alarme" Icon="{x:Static res:Images.Bluetooth}" />-->
 

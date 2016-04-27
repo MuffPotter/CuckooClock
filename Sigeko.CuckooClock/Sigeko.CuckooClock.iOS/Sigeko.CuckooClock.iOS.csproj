@@ -248,18 +248,6 @@
     <BundleResource Include="Resources\Buttons\ButtonArrowUp48.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Alarm.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Bluetooth.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Pages\Alarm.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Pages\Bluetooth.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\Icons\Delete22.png" />
   </ItemGroup>
   <ItemGroup>
@@ -272,21 +260,27 @@
     <BundleResource Include="Resources\Icons\Edit50.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Images\Checkbox\checked_checkbox.png">
+    <BundleResource Include="Resources\Controls\Checkbox\checked_checkbox.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Images\Checkbox\checked_checkbox%402x.png">
+    <BundleResource Include="Resources\Controls\Checkbox\checked_checkbox%402x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Images\Checkbox\unchecked_checkbox.png">
+    <BundleResource Include="Resources\Controls\Checkbox\unchecked_checkbox.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Images\Checkbox\unchecked_checkbox%402x.png">
+    <BundleResource Include="Resources\Controls\Checkbox\unchecked_checkbox%402x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
     <Content Include="Renderer\_ReadMe.txt" />
     <BundleResource Include="Resources\Icons\Alarm50.png" />
     <BundleResource Include="Resources\Icons\Bluetooth50.png" />
+    <BundleResource Include="Resources\Controls\Checkbox\checked_checkbox%403x.png" />
+    <BundleResource Include="Resources\Controls\Checkbox\unchecked_checkbox%403x.png" />
+    <BundleResource Include="Resources\Icons\Alarm%401x.png" />
+    <BundleResource Include="Resources\Icons\Alarm%402x.png" />
+    <BundleResource Include="Resources\Icons\Bluetooth%401x.png" />
+    <BundleResource Include="Resources\Icons\Bluetooth%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="btprogresshud">
@@ -298,6 +292,7 @@
       <Version>1.0.2.2</Version>
     </XamarinComponentReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.1.0.6529\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.1.0.6529\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

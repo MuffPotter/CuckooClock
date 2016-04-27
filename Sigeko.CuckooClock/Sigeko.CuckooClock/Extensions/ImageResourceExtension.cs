@@ -22,8 +22,8 @@ namespace Sigeko.CuckooClock.Extensions
 
 			try
 			{
-				// Do your translation lookup here, using whatever method you require
-				ImageSource imageSource = ImageSource.FromResource(Source);
+				Logger.Current.LogInfo($"ImageResourceExtension: {Source}");
+				var imageSource = ImageSource.FromResource(Source);
 				return imageSource;
 			}
 			catch (Exception exception)

@@ -48,6 +48,9 @@
 			</ctrl:AppButton>
 
 			<Image VerticalOptions="Center"
+				   Source="{ext:ImageResource Icons.Bluetooth.png}">
+			</Image>
+			<Image VerticalOptions="Center"
 				   Source="{ext:ImageResource Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth50.png}">
 			</Image>
 			<Label HorizontalOptions="CenterAndExpand"

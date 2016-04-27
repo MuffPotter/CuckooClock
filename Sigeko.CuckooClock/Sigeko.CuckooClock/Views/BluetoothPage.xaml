@@ -4,9 +4,7 @@
 				xmlns="http://xamarin.com/schemas/2014/forms"
 				xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 				xmlns:views="clr-namespace:Sigeko.CuckooClock.Views;assembly=Sigeko.CuckooClock"
-				xmlns:controls="clr-namespace:Sigeko.CuckooClock.Controls;assembly=Sigeko.CuckooClock"
 				xmlns:res="clr-namespace:Sigeko.CuckooClock.Assets;assembly=Sigeko.CuckooClock"
-				xmlns:extensions="clr-namespace:Sigeko.CuckooClock.Extensions;assembly=Sigeko.CuckooClock"
 				xmlns:converters="clr-namespace:Sigeko.CuckooClock.Converters;assembly=Sigeko.CuckooClock"
 				Title="Bluetooth Geräte">
 
@@ -21,7 +19,7 @@
 		<ToolbarItem x:Name="ScanAllButton"
 					 Order="Primary"
 					 Priority="0"
-					 Icon="Pages/Bluetooth.png"
+					 Icon="Icons/Bluetooth.png"
 					 Command="{Binding ScanDevicesCommand}"/>
 	</views:BasePage.ToolbarItems>
 
