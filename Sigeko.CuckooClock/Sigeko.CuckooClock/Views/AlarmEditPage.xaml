@@ -77,6 +77,9 @@
 					</Switch>
 				</Grid>
 				<Grid ColumnSpacing="5">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="32" />
+					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="22*"/>
 						<ColumnDefinition Width="22*"/>
@@ -98,16 +101,6 @@
 							<x:String>Stunden</x:String>
 						</Picker.Items>
 					</Picker>
-				</Grid>
-				<Grid IsVisible="False">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="2*"/>
-						<ColumnDefinition Width="8*"/>
-					</Grid.ColumnDefinitions>
-					<Label Grid.Column="0" HorizontalTextAlignment="End" Text="Alle:" >
-					</Label>
-					<ctrl:EntryEx Grid.Column="1" Keyboard="Numeric" Text="{Binding Alarm.Intervall}">
-					</ctrl:EntryEx>
 				</Grid>
 				<Grid ColumnSpacing="5">
 					<Grid.ColumnDefinitions>
@@ -147,6 +140,9 @@
 					</StackLayout>
 				</Grid>
 				<Grid ColumnSpacing="5">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="32" />
+					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="2*"/>
 						<ColumnDefinition Width="6*"/>
@@ -165,7 +161,7 @@
 									BackgroundColor="White"
 									Text="..."
 									AppButtonType="Default"
-									Command="{Binding TestCommand}">
+									Command="{Binding PlaySoundCommand}">
 					</ctrl:AppButton>
 				</Grid>
 			</StackLayout>

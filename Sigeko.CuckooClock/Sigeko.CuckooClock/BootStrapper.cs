@@ -9,6 +9,7 @@ namespace Sigeko.CuckooClock
         {
             ServicePool.Current.AddService<IMainMenuService>(new MainMenuService());
 			ServicePool.Current.AddService<IBluetoothService>(new BluetoothService());
+			ServicePool.Current.AddService<ISoundService>(new SoundService());
 		}
 	}
 }

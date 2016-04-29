@@ -68,10 +68,14 @@
 								CommandParameter="Bluetooth">
 			</ctrl:AppButton>
 
-			<ctrl:AppButton VerticalOptions="End"
-							Text="Nur zum Test"
+			<ctrl:AppButton Text="* Settings zurücksetzen *"
 							AppButtonType="Default"
-							Command="{Binding TestCommand}">
+							Command="{Binding ResetSettingsCommand}">
+			</ctrl:AppButton>
+
+			<ctrl:AppButton Text="* Sound spielen *"
+							AppButtonType="Default"
+							Command="{Binding PlaySoundCommand}">
 			</ctrl:AppButton>
 
 		</StackLayout>

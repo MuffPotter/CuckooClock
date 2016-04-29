@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Sigeko.AppFramework.Commands;
 using Sigeko.AppFramework.Navigation;
 using Sigeko.CuckooClock.Models;
+using Sigeko.CuckooClock.Services;
 
 namespace Sigeko.CuckooClock.ViewModels
 {
@@ -11,6 +13,8 @@ namespace Sigeko.CuckooClock.ViewModels
 		private readonly AlarmRepository _alarmRepository;
 
 		private readonly SettingsRepository _settingsRepository;
+
+		private readonly ISoundService _soundService;
 
 		private Alarm _alarm;
 
@@ -26,9 +30,11 @@ namespace Sigeko.CuckooClock.ViewModels
 
 			_alarmRepository = new AlarmRepository();
 			_settingsRepository = new SettingsRepository();
+			_soundService = GetService<ISoundService>();
 
 			this.SaveAlarmCommand = new DelegateCommand(ExecuteSaveAlarmCommand);
 			this.DeleteAlarmCommand = new DelegateCommand(ExecuteDeleteAlarmCommand);
+			this.PlaySoundCommand = new DelegateCommand(async o => await ExecutePlaySoundCommand(o));
 
 			PageTitel = alarm.Id == Guid.Empty ? "Neuer Alarm" : "Bearbeiten";
 			App.ActiveView = 1;
@@ -75,6 +81,22 @@ namespace Sigeko.CuckooClock.ViewModels
 				await _settingsRepository.SaveSettings();
 				await NavigationService.Current.PushBackToAsync(typeof(MainViewModel));
 			}
+		}
+
+		private ICommand _playSoundCommand;
+
+		public ICommand PlaySoundCommand
+		{
+			get { return _playSoundCommand; }
+			set { SetProperty(ref _playSoundCommand, value); }
+		}
+
+		private async Task ExecutePlaySoundCommand(object parameter)
+		{
+			if (_soundService == null)
+				return;
+
+			await _soundService.PlaySoundAsync("TestSound.mp3");
 		}
 
 		#endregion commands

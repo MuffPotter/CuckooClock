@@ -17,6 +17,8 @@ namespace Sigeko.CuckooClock.ViewModels
 
 		private readonly IBluetoothService _bluetoothService;
 
+		private readonly ISoundService _soundService;
+
 		private readonly AlarmRepository _alarmRepository;
 
 		#endregion fields private
@@ -26,12 +28,14 @@ namespace Sigeko.CuckooClock.ViewModels
 		public HomeViewModel()
 		{
 			_bluetoothService = GetService<IBluetoothService>();
+			_soundService = GetService<ISoundService>();
 			_alarmRepository = new AlarmRepository();
 
 			GetSettings();
 
-			this.TestCommand = new DelegateCommand(ExecuteTestCommand);
 			this.NextPageCommand = new DelegateCommand(ExecuteNextPageCommand);
+			this.ResetSettingsCommand = new DelegateCommand(ExecuteResetSettingsCommand);
+			this.PlaySoundCommand = new DelegateCommand(async o => await ExecutePlaySoundCommand(o));
 
 			Device.StartTimer(new TimeSpan(0, 0, 3), OnTimer);
 			//_continueTimer = true;
@@ -77,27 +81,6 @@ namespace Sigeko.CuckooClock.ViewModels
 
 		#region commands
 
-		private ICommand _testCommand;
-
-		public ICommand TestCommand
-		{
-			get { return _testCommand; }
-			set { SetProperty(ref _testCommand, value); }
-		}
-
-		private static async void ExecuteTestCommand(object parameter)
-		{
-			// Create settings repository
-			var settingsRepositoryy = new SettingsRepository();
-
-			// Read some configuration settings
-			var success = await settingsRepositoryy.DeleteSettings();
-			var settings = await settingsRepositoryy.ReadSettings();
-			App.Settings = settings;
-			success = await settingsRepositoryy.SaveSettings();
-			settings = await settingsRepositoryy.ReadSettings();
-		}
-
 		private ICommand _nextPageCommand;
 
 		public ICommand NextPageCommand
@@ -116,6 +99,44 @@ namespace Sigeko.CuckooClock.ViewModels
 			{
 				await NavigationService.Current.PushAsync(new MainViewModel(1));
 			}
+		}
+
+		private ICommand _resetSettingsCommand;
+
+		public ICommand ResetSettingsCommand
+		{
+			get { return _resetSettingsCommand; }
+			set { SetProperty(ref _resetSettingsCommand, value); }
+		}
+
+		private static async void ExecuteResetSettingsCommand(object parameter)
+		{
+			// Create settings repository
+			var settingsRepositoryy = new SettingsRepository();
+
+			// Read some configuration settings
+			await settingsRepositoryy.DeleteSettings();
+			var settings = await settingsRepositoryy.ReadSettings();
+			App.Settings = settings;
+			await settingsRepositoryy.SaveSettings();
+			settings = await settingsRepositoryy.ReadSettings();
+			App.Settings = settings;
+		}
+
+		private ICommand _playSoundCommand;
+
+		public ICommand PlaySoundCommand
+		{
+			get { return _playSoundCommand; }
+			set { SetProperty(ref _playSoundCommand, value); }
+		}
+
+		private async Task ExecutePlaySoundCommand(object parameter)
+		{
+			if (_soundService == null)
+				return;
+
+			await _soundService.PlaySoundAsync("TestSound.mp3");
 		}
 
 		#endregion commands

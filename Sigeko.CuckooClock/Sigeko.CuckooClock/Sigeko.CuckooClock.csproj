@@ -86,7 +86,10 @@
     <Compile Include="Services\IBluetoothService.cs" />
     <Compile Include="Services\IDialogServices.cs" />
     <Compile Include="Services\IOrientation.cs" />
+    <Compile Include="Services\ISoundProvider.cs" />
+    <Compile Include="Services\ISoundService.cs" />
     <Compile Include="Services\MainMenuService.cs" />
+    <Compile Include="Services\SoundService.cs" />
     <Compile Include="ViewModels\AlarmEditViewModel.cs" />
     <Compile Include="ViewModels\AlarmRepository.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />

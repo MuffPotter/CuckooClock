@@ -104,6 +104,7 @@
     <Compile Include="Renderer\TimePicker24Renderer.cs" />
     <Compile Include="Services\DialogServices.cs" />
     <Compile Include="Services\OrientationService.cs" />
+    <Compile Include="Services\SoundProvider.cs" />
     <Compile Include="Theme.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
@@ -118,7 +119,8 @@
       <Name>Sigeko.AppFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sigeko.CuckooClock\Sigeko.CuckooClock.csproj">
-      <Name>Sigeko.CuckooClock</Name>
+      <Name>Sigeko.CuckooClock2</Name>
+      <Project>{F2BE8901-7A7D-4ED8-8934-C59C4C624271}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -272,6 +274,8 @@
     <BundleResource Include="Resources\Icons\Delete%402x.png" />
     <BundleResource Include="Resources\Icons\Edit%401x.png" />
     <BundleResource Include="Resources\Icons\Edit%402x.png" />
+    <BundleResource Include="Resources\Sounds\sound.mp3" />
+    <BundleResource Include="Resources\TestSound.mp3" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="btprogresshud">
