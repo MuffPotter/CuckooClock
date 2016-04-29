@@ -31,6 +31,7 @@
 		// http://ivomynttinen.com/blog/the-ios-7-design-cheat-sheet/
 		// https://designcode.io/iosdesign-guidelines
 		// https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/IconMatrix.html
+		// https://icons8.com/web-app/for/ios7/edit#bottomIconInColl
 
 		// iPhone 4S:		320 pts x 480 pts, Scale = 2
 		// iPhone 5:		320 pts x 568 pts, Scale = 2
@@ -44,8 +45,8 @@
 		private const string RootPath = "Images/";
 
 		private const string RootPathIcons = RootPath + "Icons/";
-		public const string Edit = RootPathIcons + "Edit22.png";
-		public const string Delete = RootPathIcons + "Delete22.png";
+		public const string Edit = RootPathIcons + "Edit.png";
+		public const string Delete = RootPathIcons + "Delete.png";
 
 		private const string RootPathPages = RootPath + "Pages/";
 		public const string Bluetooth = RootPathPages + "Bluetooth.png";

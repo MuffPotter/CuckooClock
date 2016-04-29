@@ -143,7 +143,7 @@ namespace Sigeko.CuckooClock.iOS
 			() => UIImage.FromBundle("TopNavBar.png").CreateResizableImage(new UIEdgeInsets(0f, 4f, 0f, 4f)));
 
 		private static readonly Lazy<UIImage> BackButtonBackBackground = new Lazy<UIImage>(
-			() => UIImage.FromBundle("Icons/Delete22.png").CreateResizableImage(new UIEdgeInsets(0f, 14f, 0f, 4f)));
+			() => UIImage.FromBundle("Icons/Delete.png").CreateResizableImage(new UIEdgeInsets(0f, 14f, 0f, 4f)));
 
 		/// <summary>
 		/// Apply this theme to a specific view.

@@ -91,7 +91,7 @@
 									   Grid.Column="1"
 									   HeightRequest="33"
 									   VerticalOptions="Center"
-									   Source="{extensions:ImageResource Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth50.png}">
+									   Source="{extensions:ImageResource Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth@2x.png}">
 								</Image>-->
 								<Image Grid.Row="0"
 									   Grid.Column="1"

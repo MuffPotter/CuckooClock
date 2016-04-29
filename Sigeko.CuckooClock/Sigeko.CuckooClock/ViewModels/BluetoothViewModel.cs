@@ -167,7 +167,7 @@ namespace Sigeko.CuckooClock.ViewModels
 			{
 				Id = Guid.NewGuid(),
 				Name = "Test " + DateTime.Now.ToString("T") + ": " + number,
-				ImageSource = "Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth50.png",
+				ImageSource = "Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth@2x.png",
 				State = DeviceState.Disconnected,
 				SelectCommand = ConnectToDeviceCommand
 			};

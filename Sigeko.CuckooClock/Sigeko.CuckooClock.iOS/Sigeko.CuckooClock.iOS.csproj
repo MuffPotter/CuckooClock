@@ -50,7 +50,8 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>674aae30-ce8a-4762-a654-07573b413314</CodesignProvision>
+    <CodesignProvision>
+    </CodesignProvision>
     <CodesignResourceRules />
     <CodesignExtraArgs />
   </PropertyGroup>
@@ -248,18 +249,6 @@
     <BundleResource Include="Resources\Buttons\ButtonArrowUp48.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Icons\Delete22.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icons\Delete50.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icons\Edit22.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icons\Edit50.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\Controls\Checkbox\checked_checkbox.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
@@ -273,14 +262,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </BundleResource>
     <Content Include="Renderer\_ReadMe.txt" />
-    <BundleResource Include="Resources\Icons\Alarm50.png" />
-    <BundleResource Include="Resources\Icons\Bluetooth50.png" />
     <BundleResource Include="Resources\Controls\Checkbox\checked_checkbox%403x.png" />
     <BundleResource Include="Resources\Controls\Checkbox\unchecked_checkbox%403x.png" />
     <BundleResource Include="Resources\Icons\Alarm%401x.png" />
     <BundleResource Include="Resources\Icons\Alarm%402x.png" />
     <BundleResource Include="Resources\Icons\Bluetooth%401x.png" />
     <BundleResource Include="Resources\Icons\Bluetooth%402x.png" />
+    <BundleResource Include="Resources\Icons\Delete%401x.png" />
+    <BundleResource Include="Resources\Icons\Delete%402x.png" />
+    <BundleResource Include="Resources\Icons\Edit%401x.png" />
+    <BundleResource Include="Resources\Icons\Edit%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="btprogresshud">

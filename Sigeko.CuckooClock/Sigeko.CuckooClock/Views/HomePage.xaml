@@ -30,7 +30,7 @@
 					 VerticalOptions="FillAndExpand">
 
 			<Image VerticalOptions="Center"
-				   Source="{ext:ImageResource Sigeko.CuckooClock.Assets.Images.Icons.Alarm50.png}">
+				   Source="{ext:ImageResource Sigeko.CuckooClock.Assets.Images.Icons.Alarm@2x.png}">
 			</Image>
 			<Label HorizontalOptions="CenterAndExpand"
 				   HorizontalTextAlignment="Center"
@@ -51,7 +51,7 @@
 				   Source="{ext:ImageResource Icons.Bluetooth.png}">
 			</Image>
 			<Image VerticalOptions="Center"
-				   Source="{ext:ImageResource Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth50.png}">
+				   Source="{ext:ImageResource Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth@2x.png}">
 			</Image>
 			<Label HorizontalOptions="CenterAndExpand"
 				   HorizontalTextAlignment="Center"
