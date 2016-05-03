@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Sigeko.AppFramework.Services;
+using Sigeko.CuckooClock.Common;
 using Sigeko.CuckooClock.Models;
 using Sigeko.CuckooClock.Services;
 
@@ -34,10 +35,13 @@ namespace Sigeko.CuckooClock.ViewModels
 
 		public ObservableCollection<Alarm> ReadAlarmList(ICommand editCommand, ICommand deleteCommand)
 		{
+			Logger.Current.LogTrace("ReadAlarmList: START 1");
+
 			var settings = App.Settings;
 			if (settings == null)
 				return null;
 
+			Logger.Current.LogTrace("ReadAlarmList: START 2");
 			if (settings.Alarms == null)
 			{
 				settings.Alarms = new List<Alarm>();
@@ -50,6 +54,7 @@ namespace Sigeko.CuckooClock.ViewModels
 				//alarm.DayInfo = "Tage: Mo, Di, Mi, Do, Fr, Sa, So";
 			}
 
+			Logger.Current.LogTrace("ReadAlarmList: END");
 			return new ObservableCollection<Alarm>(settings.Alarms);
 		}
 

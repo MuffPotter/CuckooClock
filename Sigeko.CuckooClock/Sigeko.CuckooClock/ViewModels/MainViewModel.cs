@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Sigeko.AppFramework.Commands;
 using Sigeko.AppFramework.ViewModels;
+using Sigeko.CuckooClock.Common;
 using Sigeko.CuckooClock.Services;
 
 namespace Sigeko.CuckooClock.ViewModels
@@ -13,11 +14,13 @@ namespace Sigeko.CuckooClock.ViewModels
 
 		public MainViewModel(int activeView)
 		{
-			ActiveView = activeView;
-			App.ActiveView = activeView;
-
 			_alarmRepository = new AlarmRepository();
 			_settingsRepository = new SettingsRepository();
+
+			ActiveView = activeView;
+			App.ActiveView = activeView;
+			DeviceList = GetBluetoothDevices();
+			AlarmList = _alarmRepository.ReadAlarmList(EditAlarmCommand, DeleteAlarmCommand);
 		}
 
 		protected override void Initialize()
@@ -27,6 +30,8 @@ namespace Sigeko.CuckooClock.ViewModels
 
 		protected override void BindData()
 		{
+			Logger.Current.LogTrace("BindData: START");
+
 			this.ScanDevicesCommand = new DelegateCommand(ExecuteScanDevicesCommand);
 			this.StopScanCommand = new DelegateCommand(ExecuteStopScanCommand);
 			this.ConnectToDeviceCommand = new DelegateCommand(ExecuteConnectToDeviceCommand);
@@ -35,10 +40,11 @@ namespace Sigeko.CuckooClock.ViewModels
 			this.EditAlarmCommand = new DelegateCommand(ExecuteEditAlarmCommand);
 			this.DeleteAlarmCommand = new DelegateCommand(ExecuteDeleteAlarmCommand);
 
+			ActiveView = App.ActiveView;
 			DeviceList = GetBluetoothDevices();
 			AlarmList = _alarmRepository.ReadAlarmList(EditAlarmCommand, DeleteAlarmCommand);
 
-			ActiveView = App.ActiveView;
+			Logger.Current.LogTrace("BindData: END");
 		}
 
 		protected override async Task CleanUp()

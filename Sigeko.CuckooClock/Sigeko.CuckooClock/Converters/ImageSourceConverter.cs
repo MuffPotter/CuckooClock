@@ -37,5 +37,4 @@ namespace Sigeko.CuckooClock.Converters
 			return value;
 		}
 	}
-
 }

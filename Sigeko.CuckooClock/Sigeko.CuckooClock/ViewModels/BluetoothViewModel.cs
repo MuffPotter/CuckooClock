@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using BluetoothLE.Core;
+using Sigeko.CuckooClock.Common;
 using Sigeko.CuckooClock.Models;
 using Sigeko.CuckooClock.Services;
 using DeviceState = Sigeko.CuckooClock.Models.DeviceState;
@@ -65,7 +66,11 @@ namespace Sigeko.CuckooClock.ViewModels
 			_bluetoothService.DeviceDiscovered -= OnDeviceDiscovered;
 			_bluetoothService.DeviceConnected += OnDeviceDiscovered;
 			_bluetoothService.DeviceDiscovered += OnDeviceDiscovered;
-			_bluetoothService.StartScanning();
+
+			if ((string)parameter == "TEST")
+				_bluetoothService.StartTestScanning();
+			else
+				_bluetoothService.StartScanning();
 		}
 
 		private void OnDeviceDiscovered(object sender, BluetoothService.DeviceEventArgs<IDevice> e)
@@ -131,20 +136,23 @@ namespace Sigeko.CuckooClock.ViewModels
 			if (_bluetoothService == null)
 				return null;
 
+			Logger.Current.LogTrace("GetBluetoothDevices: START");
+
 			var devices = _bluetoothService.GetScannnedDevices();
-			return CreateTestData();
+			//if (devices == null)
+			//	return null;
 
-			if (devices == null)
-				return null;
+			var bluetoothDevices = CreateTestData();
 
-			var bluetoothDevices = new ObservableCollection<BluetoothDevice>();
-			foreach (var device in devices)
-			{
-				var bluetoothDevice = CreateDevice(device, 0);
-				if (bluetoothDevice != null)
-					bluetoothDevices.Add(bluetoothDevice);
-			}
+			//var bluetoothDevices = new ObservableCollection<BluetoothDevice>();
+			//foreach (var device in devices)
+			//{
+			//	var bluetoothDevice = CreateDevice(device, 0);
+			//	if (bluetoothDevice != null)
+			//		bluetoothDevices.Add(bluetoothDevice);
+			//}
 
+			Logger.Current.LogTrace("GetBluetoothDevices: END");
 			return bluetoothDevices;
 		}
 
@@ -163,12 +171,26 @@ namespace Sigeko.CuckooClock.ViewModels
 
 		private BluetoothDevice CreateDevice(IDevice device, int number)
 		{
+			if (device == null)
+			{
+				return new BluetoothDevice
+				{
+					Id = Guid.NewGuid(),
+					Name = "Test " + DateTime.Now.ToString("T") + ": " + number,
+					ImageSource = "Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth@2x.png",
+					State = DeviceState.Disconnected,
+					SelectCommand = ConnectToDeviceCommand
+				};
+
+			}
+
+			// Real device
 			return new BluetoothDevice
 			{
-				Id = Guid.NewGuid(),
-				Name = "Test " + DateTime.Now.ToString("T") + ": " + number,
+				Id = device.Id,
+				Name = device.Name,
 				ImageSource = "Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth@2x.png",
-				State = DeviceState.Disconnected,
+				State = (DeviceState) device.State,
 				SelectCommand = ConnectToDeviceCommand
 			};
 		}

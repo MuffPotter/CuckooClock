@@ -8,6 +8,8 @@ namespace Sigeko.CuckooClock.Services
 	{
 		void StartScanning();
 
+		void StartTestScanning();
+
 		void StopScanning();
 
 		void ConnectToDevice(Guid deviceId);

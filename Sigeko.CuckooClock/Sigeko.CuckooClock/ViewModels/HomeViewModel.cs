@@ -21,6 +21,8 @@ namespace Sigeko.CuckooClock.ViewModels
 
 		private readonly AlarmRepository _alarmRepository;
 
+		private bool _continueTimer;
+
 		#endregion fields private
 
 		#region ctor
@@ -36,21 +38,29 @@ namespace Sigeko.CuckooClock.ViewModels
 			this.NextPageCommand = new DelegateCommand(ExecuteNextPageCommand);
 			this.ResetSettingsCommand = new DelegateCommand(ExecuteResetSettingsCommand);
 			this.PlaySoundCommand = new DelegateCommand(async o => await ExecutePlaySoundCommand(o));
-
-			Device.StartTimer(new TimeSpan(0, 0, 3), OnTimer);
-			//_continueTimer = true;
-		}
-
-		private bool OnTimer()
-		{
-			Initialize();
-			return true;
 		}
 
 		protected override void Initialize()
 		{
 			NextAlarmInfo = GetNextAlarm();
 			CurrentDevice = GetCurrentBluetoothDevice();
+
+			Device.StartTimer(new TimeSpan(0, 0, 10), OnTimer);
+			_continueTimer = true;
+		}
+
+		protected override Task CleanUp()
+		{
+			_continueTimer = false;
+			return null;
+		}
+
+		private bool OnTimer()
+		{
+			NextAlarmInfo = GetNextAlarm();
+			CurrentDevice = GetCurrentBluetoothDevice();
+
+			return _continueTimer;
 		}
 
 		#endregion ctor

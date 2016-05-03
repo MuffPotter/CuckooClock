@@ -49,17 +49,13 @@ namespace Sigeko.CuckooClock.Services
 
 		public void StartScanning()
 		{
-			Device.StartTimer(new TimeSpan(0,0,3), OnTimer);
-			_continueTimer = true;
-			return;
-
-			StartScanning(10);
+			StartScanning(30);
 		}
 
-		private bool OnTimer()
+		public void StartTestScanning()
 		{
-			OnDeviceDiscovered(null);
-			return _continueTimer;
+			Device.StartTimer(new TimeSpan(0, 0, 3), OnTimer);
+			_continueTimer = true;
 		}
 
 		public void StartScanning(int scanTimeout)
@@ -68,9 +64,21 @@ namespace Sigeko.CuckooClock.Services
 				return;
 
 			_bluetoothService.ScanTimeout = TimeSpan.FromSeconds(scanTimeout);
+			_bluetoothService.ScanTimeoutElapsed += OnScanTimeoutElapsed;
 
 			_devices = new List<IDevice>();
 			_bluetoothService.StartScanningForDevices();
+		}
+
+		private void OnScanTimeoutElapsed(object sender, EventArgs e)
+		{
+			_bluetoothService.ScanTimeoutElapsed -= OnScanTimeoutElapsed;
+		}
+
+		private bool OnTimer()
+		{
+			OnDeviceDiscovered(null);
+			return _continueTimer;
 		}
 
 		public void StopScanning()
@@ -82,6 +90,7 @@ namespace Sigeko.CuckooClock.Services
 
 			_bluetoothService.DeviceDiscovered -= OnDiscovered;
 			_bluetoothService.DeviceConnected -= OnConnected;
+			_bluetoothService.ScanTimeoutElapsed -= OnScanTimeoutElapsed;
 			_bluetoothService.StopScanningForDevices();	
 		}
 

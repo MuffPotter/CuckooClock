@@ -20,7 +20,14 @@
 					 Order="Primary"
 					 Priority="0"
 					 Icon="Icons/Bluetooth.png"
-					 Command="{Binding ScanDevicesCommand}"/>
+					 Command="{Binding ScanDevicesCommand}" 
+					 CommandParameter="REAL" />
+		<ToolbarItem x:Name="ScanAllButton2"
+					 Order="Primary"
+					 Priority="0"
+					 Icon="Icons/Bluetooth.png"
+					 Command="{Binding ScanDevicesCommand}" 
+					 CommandParameter="TEST" />
 	</views:BasePage.ToolbarItems>
 
 	<Grid x:Name="MainGrid"
