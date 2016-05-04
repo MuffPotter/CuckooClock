@@ -119,6 +119,10 @@ namespace BluetoothLE.iOS
 			DiscoveredDevices = new List<IDevice>();
 			IsScanning = true;
 
+			var device = new Device(Guid.NewGuid(), DateTime.Now.ToLongTimeString());
+			DiscoveredDevices.Add(device);
+			DeviceDiscovered(this, new DeviceDiscoveredEventArgs(device));
+
 			_central.ScanForPeripherals(uuids.ToArray());
 
 			await Task.Delay(ScanTimeout);

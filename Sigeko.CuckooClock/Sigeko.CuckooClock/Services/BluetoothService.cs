@@ -20,12 +20,12 @@ namespace Sigeko.CuckooClock.Services
 	{
 		private bool _continueTimer;
 
-		private readonly IAdapter _bluetoothService;
+		private readonly IAdapter _bluetoothAdapter;
 
 		private IList<IDevice> _devices;
 
 		private IEnumerable<IDevice> DiscoveredDevices 
-			=> _bluetoothService?.DiscoveredDevices;
+			=> _bluetoothAdapter?.DiscoveredDevices;
 
 		private IDevice DeviceFromId(Guid deviceId)
 		{
@@ -34,17 +34,19 @@ namespace Sigeko.CuckooClock.Services
 
 		public BluetoothService()
 		{
-			_bluetoothService = DependencyService.Get<IAdapter>();
-			if (_bluetoothService == null)
+			//_bluetoothAdapter = DependencyService.Get<IAdapter>();
+			_bluetoothAdapter = App.BluetoothAdapter;
+			if (_bluetoothAdapter == null)
 				return;
 
-			_bluetoothService.ScanTimeout = TimeSpan.FromSeconds(10);
-			_bluetoothService.ConnectionTimeout = TimeSpan.FromSeconds(10);
+			//_bluetoothAdapter.ScanTimeout = TimeSpan.FromSeconds(10);
+			//_bluetoothAdapter.ConnectionTimeout = TimeSpan.FromSeconds(10);
 
-			_bluetoothService.DeviceDiscovered -= OnDiscovered;
-			_bluetoothService.DeviceConnected -= OnConnected;
-			_bluetoothService.DeviceDiscovered += OnDiscovered;
-			_bluetoothService.DeviceConnected += OnConnected;
+			//_bluetoothAdapter.DeviceDiscovered -= OnDiscovered;
+			//_bluetoothAdapter.DeviceConnected -= OnConnected;
+			_bluetoothAdapter.DeviceDiscovered += OnDiscovered;
+			_bluetoothAdapter.DeviceConnected += OnConnected;
+			_bluetoothAdapter.StopScanningForDevices();
 		}
 
 		public void StartScanning()
@@ -60,19 +62,19 @@ namespace Sigeko.CuckooClock.Services
 
 		public void StartScanning(int scanTimeout)
 		{
-			if (_bluetoothService == null)
+			if (_bluetoothAdapter == null)
 				return;
 
-			_bluetoothService.ScanTimeout = TimeSpan.FromSeconds(scanTimeout);
-			_bluetoothService.ScanTimeoutElapsed += OnScanTimeoutElapsed;
+			_bluetoothAdapter.ScanTimeout = TimeSpan.FromSeconds(scanTimeout);
+			_bluetoothAdapter.ScanTimeoutElapsed += OnScanTimeoutElapsed;
 
 			_devices = new List<IDevice>();
-			_bluetoothService.StartScanningForDevices();
+			_bluetoothAdapter.StartScanningForDevices();
 		}
 
 		private void OnScanTimeoutElapsed(object sender, EventArgs e)
 		{
-			_bluetoothService.ScanTimeoutElapsed -= OnScanTimeoutElapsed;
+			_bluetoothAdapter.ScanTimeoutElapsed -= OnScanTimeoutElapsed;
 		}
 
 		private bool OnTimer()
@@ -85,30 +87,30 @@ namespace Sigeko.CuckooClock.Services
 		{
 			_continueTimer = false;
 
-			if (_bluetoothService == null)
+			if (_bluetoothAdapter == null)
 				return;
 
-			_bluetoothService.DeviceDiscovered -= OnDiscovered;
-			_bluetoothService.DeviceConnected -= OnConnected;
-			_bluetoothService.ScanTimeoutElapsed -= OnScanTimeoutElapsed;
-			_bluetoothService.StopScanningForDevices();	
+			_bluetoothAdapter.DeviceDiscovered -= OnDiscovered;
+			_bluetoothAdapter.DeviceConnected -= OnConnected;
+			_bluetoothAdapter.ScanTimeoutElapsed -= OnScanTimeoutElapsed;
+			_bluetoothAdapter.StopScanningForDevices();	
 		}
 
 		public void ConnectToDevice(Guid deviceId)
 		{
-			if (_bluetoothService == null)
+			if (_bluetoothAdapter == null)
 				return;
 
 			var device = DeviceFromId(deviceId);
 			if(device == null)
 				return;
 
-			_bluetoothService.ConnectToDevice(device);
+			_bluetoothAdapter.ConnectToDevice(device);
 		}
 
 		public IEnumerable<IDevice> GetScannnedDevices()
 		{
-			return _bluetoothService?.DiscoveredDevices;
+			return _bluetoothAdapter?.DiscoveredDevices;
 		}
 
 		public IDevice ConnectedDevice()

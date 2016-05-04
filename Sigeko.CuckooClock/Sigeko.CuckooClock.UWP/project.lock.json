@@ -301,14 +301,6 @@
           "lib/portable-win+net45+wp8+win8+wpa81/Rg.Plugins.Popup.dll": {}
         }
       },
-      "Splat/1.6.2": {
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
-        }
-      },
       "System.AppContext/4.0.0": {
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -1838,14 +1830,6 @@
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
-      },
-      "XamarinBluetoothLE/1.0.0": {
-        "compile": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
-        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
@@ -2145,14 +2129,6 @@
           "runtimes/win8-arm/native/mscordbi.dll": {},
           "runtimes/win8-arm/native/mscorrc.debug.dll": {},
           "runtimes/win8-arm/native/mscorrc.dll": {}
-        }
-      },
-      "Splat/1.6.2": {
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -3545,14 +3521,6 @@
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
-      },
-      "XamarinBluetoothLE/1.0.0": {
-        "compile": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
-        }
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
@@ -3830,14 +3798,6 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Private.DataContractSerialization.dll": {}
-        }
-      },
-      "Splat/1.6.2": {
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -5209,14 +5169,6 @@
           "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
-        }
-      },
-      "XamarinBluetoothLE/1.0.0": {
-        "compile": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
         }
       }
     },
@@ -5527,14 +5479,6 @@
           "runtimes/win7-x64/native/mscorrc.dll": {}
         }
       },
-      "Splat/1.6.2": {
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
-        }
-      },
       "System.AppContext/4.0.0": {
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -6925,14 +6869,6 @@
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
-      },
-      "XamarinBluetoothLE/1.0.0": {
-        "compile": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
-        }
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
@@ -7210,14 +7146,6 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Private.DataContractSerialization.dll": {}
-        }
-      },
-      "Splat/1.6.2": {
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -8589,14 +8517,6 @@
           "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
-        }
-      },
-      "XamarinBluetoothLE/1.0.0": {
-        "compile": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
         }
       }
     },
@@ -8907,14 +8827,6 @@
           "runtimes/win7-x86/native/mscorrc.dll": {}
         }
       },
-      "Splat/1.6.2": {
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
-        }
-      },
       "System.AppContext/4.0.0": {
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -10305,14 +10217,6 @@
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
-      },
-      "XamarinBluetoothLE/1.0.0": {
-        "compile": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
-        }
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
@@ -10590,14 +10494,6 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Private.DataContractSerialization.dll": {}
-        }
-      },
-      "Splat/1.6.2": {
-        "compile": {
-          "lib/NetCore45/Splat.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/Splat.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -11969,14 +11865,6 @@
           "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
           "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
-        }
-      },
-      "XamarinBluetoothLE/1.0.0": {
-        "compile": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll": {}
         }
       }
     }
@@ -12761,36 +12649,6 @@
         "runtimes/win8-arm/native/mscordbi.dll",
         "runtimes/win8-arm/native/mscorrc.debug.dll",
         "runtimes/win8-arm/native/mscorrc.dll"
-      ]
-    },
-    "Splat/1.6.2": {
-      "sha512": "DeH0MxPU+D4JchkIDPYG4vUT+hsWs9S41cFle0/4K5EJMXWurx5DzAkj2366DfK14/XKNhsu6tCl4dZXJ3CD4w==",
-      "type": "package",
-      "files": [
-        "Splat.1.6.2.nupkg.sha512",
-        "Splat.nuspec",
-        "lib/MonoMac/Splat.dll",
-        "lib/MonoMac/Splat.dll.mdb",
-        "lib/Net45/Splat.dll",
-        "lib/Net45/Splat.pdb",
-        "lib/NetCore45/Splat.dll",
-        "lib/NetCore45/Splat.pdb",
-        "lib/NetCore45/Splat.pri",
-        "lib/Portable-Win81+Wpa81/Splat.dll",
-        "lib/Portable-Win81+Wpa81/Splat.pdb",
-        "lib/Portable-Win81+Wpa81/Splat.pri",
-        "lib/Portable-net45+win+wpa81+wp80/Splat.dll",
-        "lib/Xamarin.Mac10/Splat-XamarinMac.csproj.FilesWrittenAbsolute.txt",
-        "lib/Xamarin.Mac10/Splat.dll",
-        "lib/Xamarin.Mac10/Splat.dll.mdb",
-        "lib/Xamarin.iOS10/Splat.dll",
-        "lib/Xamarin.iOS10/Splat.dll.mdb",
-        "lib/monoandroid/Splat.dll",
-        "lib/monoandroid/Splat.dll.mdb",
-        "lib/monotouch/Splat.dll",
-        "lib/monotouch/Splat.dll.mdb",
-        "lib/wp8/Splat.dll",
-        "lib/wp8/Splat.pdb"
       ]
     },
     "System.AppContext/4.0.0": {
@@ -15490,24 +15348,6 @@
         "tools/Xamarin.Forms.Xaml.Design.dll",
         "tools/init.ps1"
       ]
-    },
-    "XamarinBluetoothLE/1.0.0": {
-      "sha512": "j+BcZPDoZIBPwlRVYdmerOkFr23vEU4JJjyzgBZ3sA9bhvP6nIKBf6A1hvc6GFu46f6nNQyShiAgYskInOLw8Q==",
-      "type": "package",
-      "files": [
-        "XamarinBluetoothLE.1.0.0.nupkg.sha512",
-        "XamarinBluetoothLE.nuspec",
-        "lib/MonoAndroid10/BluetoothLE.Core.dll",
-        "lib/MonoAndroid10/BluetoothLE.Core.xml",
-        "lib/MonoAndroid10/BluetoothLE.Droid.dll",
-        "lib/MonoAndroid10/BluetoothLE.Droid.xml",
-        "lib/Xamarin.iOS10/BluetoothLE.Core.dll",
-        "lib/Xamarin.iOS10/BluetoothLE.Core.xml",
-        "lib/Xamarin.iOS10/BluetoothLE.iOS.dll",
-        "lib/Xamarin.iOS10/BluetoothLE.iOS.xml",
-        "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.dll",
-        "lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/BluetoothLE.Core.xml"
-      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -15517,9 +15357,7 @@
       "Newtonsoft.Json >= 8.0.3",
       "PCLStorage >= 1.0.2",
       "Rg.Plugins.Popup >= 0.0.15",
-      "Splat >= 1.6.2",
-      "Xamarin.Forms >= 2.1.0.6529",
-      "XamarinBluetoothLE >= 1.0.0"
+      "Xamarin.Forms >= 2.1.0.6529"
     ],
     "UAP,Version=v10.0": []
   }

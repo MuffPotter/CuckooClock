@@ -123,6 +123,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BluetoothLE.Core\BluetoothLE.Core.csproj">
+      <Project>{EBD23762-16B0-4C51-9ACC-1917C2E2DD64}</Project>
+      <Name>BluetoothLE.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BluetoothLE.iOS\BluetoothLE.iOS.csproj">
+      <Project>{8b611332-9d09-4d47-ab7f-da1a4e2cdf24}</Project>
+      <Name>BluetoothLE.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
     <ProjectReference Include="..\Sigeko.AppFramework\Sigeko.AppFramework.csproj">
       <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
       <Name>Sigeko.AppFramework</Name>
@@ -151,14 +161,6 @@
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="BluetoothLE.Core, Version=1.0.5879.15767, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XamarinBluetoothLE.1.0.0\lib\Xamarin.iOS10\BluetoothLE.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="BluetoothLE.iOS, Version=1.0.5879.15768, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XamarinBluetoothLE.1.0.0\lib\Xamarin.iOS10\BluetoothLE.iOS.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="BTProgressHUD">
       <HintPath>..\..\Components\btprogresshud-1.20\lib\ios-unified\BTProgressHUD.dll</HintPath>
     </Reference>
@@ -187,10 +189,6 @@
     </Reference>
     <Reference Include="Rg.Plugins.Popup.IOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Rg.Plugins.Popup.0.0.15\lib\Xamarin.IOS\Rg.Plugins.Popup.IOS.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Splat.1.6.2\lib\Xamarin.iOS10\Splat.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

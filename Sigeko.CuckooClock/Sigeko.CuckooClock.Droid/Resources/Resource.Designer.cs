@@ -1567,7 +1567,6 @@ namespace Sigeko.CuckooClock.Droid
 			global::Rg.Plugins.Popup.Droid.Resource.Styleable.ViewStubCompat_android_id = global::Sigeko.CuckooClock.Droid.Resource.Styleable.ViewStubCompat_android_id;
 			global::Rg.Plugins.Popup.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId = global::Sigeko.CuckooClock.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId;
 			global::Rg.Plugins.Popup.Droid.Resource.Styleable.ViewStubCompat_android_layout = global::Sigeko.CuckooClock.Droid.Resource.Styleable.ViewStubCompat_android_layout;
-			global::Splat.Resource.String.library_name = global::Sigeko.CuckooClock.Droid.Resource.String.library_name;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Sigeko.CuckooClock.Droid.Resource.Attribute.actionBarSize;
 		}
 		
@@ -1635,14 +1634,14 @@ namespace Sigeko.CuckooClock.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040002
-			public const int ApplicationName = 2130968578;
-			
 			// aapt resource value: 0x7f040001
-			public const int Hello = 2130968577;
+			public const int ApplicationName = 2130968577;
 			
 			// aapt resource value: 0x7f040000
-			public const int library_name = 2130968576;
+			public const int Hello = 2130968576;
+			
+			// aapt resource value: 0x7f040002
+			public const int library_name = 2130968578;
 			
 			static String()
 			{

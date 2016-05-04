@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BluetoothLE.Core;
 using Newtonsoft.Json;
 using PCLStorage;
 using Sigeko.AppFramework.ViewModels;
@@ -43,6 +44,18 @@ namespace Sigeko.CuckooClock
 				_keyboardStatus = value;
 				MessagingCenter.Send(this, "Keyboard", value);
 			}
+		}
+
+		private static readonly IAdapter _bluetoothAdapter;
+
+		public static IAdapter BluetoothAdapter => _bluetoothAdapter;
+
+		static App()
+		{
+			_bluetoothAdapter = DependencyService.Get<IAdapter>();
+
+			_bluetoothAdapter.ScanTimeout = TimeSpan.FromSeconds(200);
+			_bluetoothAdapter.ConnectionTimeout = TimeSpan.FromSeconds(200);
 		}
 
 		public App()

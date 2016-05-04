@@ -16,6 +16,16 @@ namespace BluetoothLE.iOS
 		private readonly CBPeripheral _peripheral;
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="newGuid"></param>
+		/// <param name="toLongTimeString"></param>
+		public Device(Guid newGuid, string toLongTimeString)
+		{
+			_id = newGuid;
+		}
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="BluetoothLE.iOS.Device"/> class.
 		/// </summary>
 		/// <param name="peripheral">Native peripheral.</param>
@@ -64,6 +74,7 @@ namespace BluetoothLE.iOS
 		}
 
 		private Guid _id;
+
 		/// <summary>
 		/// Gets the unique identifier for the device
 		/// </summary>
@@ -74,7 +85,7 @@ namespace BluetoothLE.iOS
 		/// Gets the device name
 		/// </summary>
 		/// <value>The device name</value>
-		public string Name { get { return _peripheral.Name; } }
+		public string Name { get { return _peripheral == null ? DateTime.Now.ToShortTimeString() : _peripheral.Name; } }
 
 		/// <summary>
 		/// Gets the Received Signal Strength Indicator
