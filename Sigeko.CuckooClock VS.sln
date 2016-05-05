@@ -17,11 +17,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigeko.AppFramework", "Sige
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigeko.CuckooClock.Droid", "Sigeko.CuckooClock\Sigeko.CuckooClock.Droid\Sigeko.CuckooClock.Droid.csproj", "{530CBFD3-0084-4FDB-ABFB-13B6AA9293E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothLE.Core", "Sigeko.CuckooClock\BluetoothLE.Core\BluetoothLE.Core.csproj", "{EBD23762-16B0-4C51-9ACC-1917C2E2DD64}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{2B463429-67F7-4FE4-B252-A0FE7B95FB74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothLE.Droid", "Sigeko.CuckooClock\BluetoothLE.Droid\BluetoothLE.Droid.csproj", "{BEDC9B01-4519-4607-BCAB-3700ACDF405E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BluetoothLE", "BluetoothLE", "{99948322-5292-4F86-88BB-16F2023F5EBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothLE.iOS", "Sigeko.CuckooClock\BluetoothLE.iOS\BluetoothLE.iOS.csproj", "{8B611332-9D09-4D47-AB7F-DA1A4E2CDF24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothLE.Core", "Libraries\BluetoothLE\BluetoothLE.Core\BluetoothLE.Core.csproj", "{EBD23762-16B0-4C51-9ACC-1917C2E2DD64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothLE.Droid", "Libraries\BluetoothLE\BluetoothLE.Droid\BluetoothLE.Droid.csproj", "{BEDC9B01-4519-4607-BCAB-3700ACDF405E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothLE.iOS", "Libraries\BluetoothLE\BluetoothLE.iOS\BluetoothLE.iOS.csproj", "{8B611332-9D09-4D47-AB7F-DA1A4E2CDF24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -585,5 +589,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{99948322-5292-4F86-88BB-16F2023F5EBE} = {2B463429-67F7-4FE4-B252-A0FE7B95FB74}
+		{EBD23762-16B0-4C51-9ACC-1917C2E2DD64} = {99948322-5292-4F86-88BB-16F2023F5EBE}
+		{BEDC9B01-4519-4607-BCAB-3700ACDF405E} = {99948322-5292-4F86-88BB-16F2023F5EBE}
+		{8B611332-9D09-4D47-AB7F-DA1A4E2CDF24} = {99948322-5292-4F86-88BB-16F2023F5EBE}
 	EndGlobalSection
 EndGlobal

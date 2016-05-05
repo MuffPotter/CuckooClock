@@ -78,7 +78,7 @@ namespace Sigeko.CuckooClock.ViewModels
 		private void OnDeviceDiscovered(object sender, BluetoothService.DeviceEventArgs<IDevice> eventArgs)
 		{
 			ProgressValue += .1;
-			DeviceList.Add(CreateDevice(null, DeviceList.Count));
+			DeviceList.Add(CreateDevice(eventArgs.Device, DeviceList.Count));
 		}
 
 		private void OnDeviceConnected(object sender, BluetoothService.DeviceEventArgs<IDevice> eventArgs)

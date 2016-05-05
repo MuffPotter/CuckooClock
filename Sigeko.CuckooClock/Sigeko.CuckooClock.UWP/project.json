@@ -4,8 +4,8 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Newtonsoft.Json": "8.0.3",
     "PCLStorage": "1.0.2",
-    "Rg.Plugins.Popup": "0.0.15",
-    "Xamarin.Forms": "2.1.0.6529"
+    "Rg.Plugins.Popup": "0.0.16",
+    "Xamarin.Forms": "2.2.0.31"
   },
   "frameworks": {
     "uap10.0": {}

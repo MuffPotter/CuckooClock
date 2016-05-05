@@ -79,7 +79,9 @@
 								   Text="Verbinden" />
 							</ViewCell.ContextActions>
 							
-							<Grid>
+							<Grid RowSpacing="0"
+								  ColumnSpacing="0"
+								Margin="10">
 								<Grid.RowDefinitions>
 									<RowDefinition Height="Auto" />
 									<RowDefinition Height="Auto" />
@@ -101,6 +103,7 @@
 									   Source="{extensions:ImageResource Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth@2x.png}">
 								</Image>-->
 								<Image Grid.Row="0"
+									   Grid.RowSpan="2"
 									   Grid.Column="1"
 									   HeightRequest="33"
 									   VerticalOptions="Center"

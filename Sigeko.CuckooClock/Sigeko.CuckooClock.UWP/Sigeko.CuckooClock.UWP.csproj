@@ -133,7 +133,7 @@
       <Name>Sigeko.AppFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sigeko.CuckooClock\Sigeko.CuckooClock.csproj">
-      <Name>Sigeko.CuckooClock2</Name>
+      <Name>Sigeko.CuckooClock</Name>
       <Project>{F2BE8901-7A7D-4ED8-8934-C59C4C624271}</Project>
     </ProjectReference>
   </ItemGroup>
