@@ -14,19 +14,19 @@
 		</ResourceDictionary>
 	</views:BasePage.Resources>
 
-	
+
 	<views:BasePage.ToolbarItems>
 		<ToolbarItem x:Name="ScanAllButton"
 					 Order="Primary"
 					 Priority="0"
 					 Icon="Icons/Bluetooth.png"
-					 Command="{Binding ScanDevicesCommand}" 
+					 Command="{Binding ScanDevicesCommand}"
 					 CommandParameter="REAL" />
 		<ToolbarItem x:Name="ScanAllButton2"
 					 Order="Primary"
 					 Priority="0"
 					 Icon="Icons/Bluetooth.png"
-					 Command="{Binding ScanDevicesCommand}" 
+					 Command="{Binding ScanDevicesCommand}"
 					 CommandParameter="TEST" />
 	</views:BasePage.ToolbarItems>
 
@@ -52,7 +52,7 @@
 
 			<ProgressBar IsVisible="{Binding IsScanning}" Progress="{Binding ProgressValue}">
 			</ProgressBar>
-			
+
 			<Grid VerticalOptions="Start">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*" />
@@ -60,12 +60,12 @@
 				</Grid.ColumnDefinitions>
 				<Label Text="{Binding DeviceList.Count, StringFormat = Anzahl Geräte: '{0}'}">
 				</Label>
-				<Button Grid.Column="1" 
+				<Button Grid.Column="1"
 						IsVisible="{Binding IsScanning}"
 						Text="Stop"
 						Command="{Binding StopScanCommand}"></Button>
 			</Grid>
-				
+
 			<ListView x:Name="DeviceListView"
 					  ItemsSource="{Binding DeviceList}"
 					  HasUnevenRows = "True"
@@ -74,16 +74,16 @@
 					<DataTemplate>
 						<ViewCell>
 							<ViewCell.ContextActions>
-								<MenuItem Command="{Binding SelectCommand}" 
+								<MenuItem Command="{Binding SelectCommand}"
 										  CommandParameter="{Binding .}"
 								   Text="Verbinden" />
 							</ViewCell.ContextActions>
-							
+
 							<Grid RowSpacing="0"
 								  ColumnSpacing="0"
-								Margin="10">
+								  VerticalOptions="Center"
+								  Padding="5,5,5,0" >
 								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
 									<RowDefinition Height="Auto" />
 								</Grid.RowDefinitions>
 								<Grid.ColumnDefinitions>
@@ -94,7 +94,7 @@
 											 Grid.Column="0">
 									<Label Text="{Binding Name}" />
 									<Label Text="{Binding Id, StringFormat = '{0}'}"
-										   FontSize="12"/>
+										   FontSize="10"/>
 								</StackLayout>
 								<!--<Image Grid.Row="0"
 									   Grid.Column="1"
@@ -103,9 +103,8 @@
 									   Source="{extensions:ImageResource Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth@2x.png}">
 								</Image>-->
 								<Image Grid.Row="0"
-									   Grid.RowSpan="2"
 									   Grid.Column="1"
-									   HeightRequest="33"
+									   HeightRequest="50"
 									   VerticalOptions="Center"
 									   Source="{Binding ImageSource, Converter={StaticResource ConvertImageSource}}">
 								</Image>
