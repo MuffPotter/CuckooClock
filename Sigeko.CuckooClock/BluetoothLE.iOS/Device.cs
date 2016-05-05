@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using BluetoothLE.Core;
 using System.Collections.Generic;
 using CoreBluetooth;
@@ -22,7 +23,7 @@ namespace BluetoothLE.iOS
 		/// <param name="toLongTimeString"></param>
 		public Device(Guid newGuid, string toLongTimeString)
 		{
-			_id = newGuid;
+			Id = newGuid;
 		}
 
 		/// <summary>
@@ -32,7 +33,8 @@ namespace BluetoothLE.iOS
 		public Device(CBPeripheral peripheral)
 		{
 			_peripheral = peripheral;
-			_id = DeviceIdentifierToGuid(_peripheral.Identifier);
+			Id = DeviceIdentifierToGuid(_peripheral.Identifier);
+			Debug.WriteLine("Device name " + _peripheral.Name);
 
 			_peripheral.DiscoveredService += DiscoveredService;
 
@@ -73,31 +75,29 @@ namespace BluetoothLE.iOS
 			_peripheral.Dispose();
 		}
 
-		private Guid _id;
-
 		/// <summary>
 		/// Gets the unique identifier for the device
 		/// </summary>
 		/// <value>The device identifier</value>
-		public Guid Id { get { return _id; } }
+		public Guid Id { get; }
 
 		/// <summary>
 		/// Gets the device name
 		/// </summary>
 		/// <value>The device name</value>
-		public string Name { get { return _peripheral == null ? DateTime.Now.ToShortTimeString() : _peripheral.Name; } }
+		public string Name => _peripheral == null ? DateTime.Now.ToShortTimeString() : _peripheral.Name;
 
 		/// <summary>
 		/// Gets the Received Signal Strength Indicator
 		/// </summary>
 		/// <value>The RSSI in decibels</value>
-		public int Rssi { get { return _peripheral.RSSI.Int32Value; } }
+		public int Rssi => _peripheral?.RSSI.Int32Value ?? -1;
 
 		/// <summary>
 		/// Gets the native device object reference. Should be cast to the appropriate type.
 		/// </summary>
 		/// <value>The native device</value>
-		public object NativeDevice { get { return _peripheral; } }
+		public object NativeDevice => _peripheral;
 
 		/// <summary>
 		/// Gets the state of the device
@@ -107,6 +107,9 @@ namespace BluetoothLE.iOS
 		{
 			get
 			{
+				if(_peripheral == null)
+					return DeviceState.Disconnected;
+
 				switch (_peripheral.State)
 				{
 					case CBPeripheralState.Connected:
@@ -115,6 +118,8 @@ namespace BluetoothLE.iOS
 						return DeviceState.Connecting;
 					case CBPeripheralState.Disconnected:
 						return DeviceState.Disconnected;
+					case CBPeripheralState.Disconnecting:
+						return DeviceState.Disconnecting;
 					default:
 						return DeviceState.Disconnected;
 				}
@@ -133,18 +138,18 @@ namespace BluetoothLE.iOS
 
 		private void DiscoveredService(object sender, NSErrorEventArgs args)
 		{
-			if (_peripheral.Services != null) 
+			if (_peripheral.Services == null)
+				return;
+
+			foreach (var s in _peripheral.Services)
 			{
-				foreach (var s in _peripheral.Services)
-				{
-					var serviceId = s.UUID.ToString().ToGuid();
-					if (Services.All(x => x.Id != serviceId))
-					{
-						var service = new Service(_peripheral, s);
-						Services.Add(service);
-						ServiceDiscovered(this, new ServiceDiscoveredEventArgs(service));
-					}
-				}
+				var serviceId = s.UUID.ToString().ToGuid();
+				if (Services.Any(x => x.Id == serviceId))
+					continue;
+
+				var service = new Service(_peripheral, s);
+				Services.Add(service);
+				ServiceDiscovered(this, new ServiceDiscoveredEventArgs(service));
 			}
 		}
 
@@ -161,7 +166,8 @@ namespace BluetoothLE.iOS
 		/// collector can reclaim the memory that the <see cref="BluetoothLE.iOS.Device"/> was occupying.</remarks>
 		public void Dispose()
 		{
-			_peripheral.DiscoveredService -= DiscoveredService;
+			if(_peripheral != null)
+				_peripheral.DiscoveredService -= DiscoveredService;
 		}
 
 		#endregion

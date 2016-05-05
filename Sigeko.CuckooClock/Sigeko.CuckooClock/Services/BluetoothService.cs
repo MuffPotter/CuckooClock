@@ -69,12 +69,15 @@ namespace Sigeko.CuckooClock.Services
 			_bluetoothAdapter.ScanTimeoutElapsed += OnScanTimeoutElapsed;
 
 			_devices = new List<IDevice>();
+
+			OnDeviceDiscovered(null);
 			_bluetoothAdapter.StartScanningForDevices();
 		}
 
 		private void OnScanTimeoutElapsed(object sender, EventArgs e)
 		{
 			_bluetoothAdapter.ScanTimeoutElapsed -= OnScanTimeoutElapsed;
+			StartScanning(300);
 		}
 
 		private bool OnTimer()

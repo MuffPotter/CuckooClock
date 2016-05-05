@@ -20,7 +20,12 @@ namespace BluetoothLE.Core
 		/// <summary>
 		/// Connected state.
 		/// </summary>
-		Connected
+		Connected,
+
+		/// <summary>
+		/// Disconnecting state.
+		/// </summary>
+		Disconnecting,
 	}
 }
 

@@ -1,20 +1,24 @@
 ﻿using System;
 using BluetoothLE.Core;
 using CoreBluetooth;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using BluetoothLE.Core.Events;
+using Foundation;
 
 namespace BluetoothLE.iOS
 {
 	/// <summary>
 	/// Concrete implementation of <see cref="BluetoothLE.Core.IAdapter"/> interface.
+	/// https://github.com/tbrushwyler/Xamarin.BluetoothLE/blob/master/BluetoothLE.iOS/Adapter.cs
 	/// </summary>
-	public class Adapter : IAdapter
+	public class Adapter : IAdapter // CBCentralManagerDelegate, IAdapter
 	{
 		private readonly CBCentralManager _central;
+
 		private readonly AutoResetEvent _stateChanged;
 
 		private static Adapter _current;
@@ -23,17 +27,25 @@ namespace BluetoothLE.iOS
 		/// Gets the current Adpater instance
 		/// </summary>
 		/// <value>The current Adapter instance</value>
-		public static Adapter Current
-		{
-			get { return _current; }
-		}
+		public static Adapter Current => _current;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BluetoothLE.iOS.Adapter"/> class.
 		/// </summary>
 		public Adapter()
 		{
-			_central = new CBCentralManager();
+			// The dispatch queue to use to dispatch the central role events. 
+			// If the value is nil, the central manager dispatches central 
+			// role events using the main queue.
+			// https://developer.xamarin.com/api/type/MonoTouch.CoreFoundation.DispatchQueue/
+			//_central = new CBCentralManager();
+			//_central = new CBCentralManager(CoreFoundation.DispatchQueue.MainQueue);
+			//_central = new CBCentralManager(CoreFoundation.DispatchQueue.DefaultGlobalQueue);
+
+			//var myDelegate = new CentralManagerDelegate();
+			//_central = new CBCentralManager(myDelegate, null);
+			_central = new CBCentralManager(CoreFoundation.DispatchQueue.DefaultGlobalQueue);
+			//_central.Delegate = this;
 
 			_central.DiscoveredPeripheral += DiscoveredPeripheral;
 			_central.UpdatedState += UpdatedState;
@@ -60,27 +72,27 @@ namespace BluetoothLE.iOS
 		/// <summary>
 		/// Occurs when device discovered.
 		/// </summary>
-		public event EventHandler<DeviceDiscoveredEventArgs> DeviceDiscovered = delegate {};
+		public event EventHandler<DeviceDiscoveredEventArgs> DeviceDiscovered = delegate { };
 
 		/// <summary>
 		/// Occurs when device connected.
 		/// </summary>
-		public event EventHandler<DeviceConnectionEventArgs> DeviceConnected = delegate {};
+		public event EventHandler<DeviceConnectionEventArgs> DeviceConnected = delegate { };
 
 		/// <summary>
 		/// Occurs when device disconnected.
 		/// </summary>
-		public event EventHandler<DeviceConnectionEventArgs> DeviceDisconnected = delegate {};
+		public event EventHandler<DeviceConnectionEventArgs> DeviceDisconnected = delegate { };
 
 		/// <summary>
 		/// Occurs when scan timeout elapsed.
 		/// </summary>
-		public event EventHandler ScanTimeoutElapsed = delegate {};
+		public event EventHandler ScanTimeoutElapsed = delegate { };
 
 		/// <summary>
 		/// Occurs when a device failed to connect.
 		/// </summary>
-		public event EventHandler<DeviceConnectionEventArgs> DeviceFailedToConnect = delegate {};
+		public event EventHandler<DeviceConnectionEventArgs> DeviceFailedToConnect = delegate { };
 
 		/// <summary>
 		/// Gets or sets the amount of time to scan for devices.
@@ -123,7 +135,8 @@ namespace BluetoothLE.iOS
 			DiscoveredDevices.Add(device);
 			DeviceDiscovered(this, new DeviceDiscoveredEventArgs(device));
 
-			_central.ScanForPeripherals(uuids.ToArray());
+			//_central.ScanForPeripherals(uuids.ToArray());
+			_central.ScanForPeripherals(peripheralUuids: null);
 
 			await Task.Delay(ScanTimeout);
 
@@ -202,6 +215,7 @@ namespace BluetoothLE.iOS
 		private void DiscoveredPeripheral(object sender, CBDiscoveredPeripheralEventArgs e)
 		{
 			var deviceId = Device.DeviceIdentifierToGuid(e.Peripheral.Identifier);
+			Debug.WriteLine("Discovered " + deviceId);
 			if (DiscoveredDevices.All(x => x.Id != deviceId))
 			{
 				var device = new Device(e.Peripheral);
@@ -212,6 +226,7 @@ namespace BluetoothLE.iOS
 
 		private void UpdatedState(object sender, EventArgs e)
 		{
+			Debug.WriteLine("State Changed to " + ((CBCentralManager)sender).State);
 			_stateChanged.Set();
 		}
 
@@ -241,14 +256,54 @@ namespace BluetoothLE.iOS
 		private void FailedToConnectPeripheral(object sender, CBPeripheralErrorEventArgs e)
 		{
 			var device = new Device(e.Peripheral);
-			var args = new DeviceConnectionEventArgs(device) {
+			var args = new DeviceConnectionEventArgs(device)
+			{
 				ErrorMessage = e.Error.Description
 			};
 
 			DeviceFailedToConnect(this, args);
 		}
 
+//		public override void RetrievedConnectedPeripherals(CBCentralManager central, CBPeripheral[] peripherals)
+//		{
+//			foreach (CBPeripheral peripheral in peripherals)
+//				Debug.WriteLine("RetrievedConnectedPeripherals: " + peripheral.Name);
+//		}
+//
+//		public override void RetrievedPeripherals(CBCentralManager central, CBPeripheral[] peripherals)
+//		{
+//			foreach (CBPeripheral peripheral in peripherals)
+//				Debug.WriteLine("RetrievedPeripherals: " + peripheral.Name);
+//		}
+//
+//		public override void UpdatedState(CBCentralManager central)
+//		{
+//			Debug.WriteLine("State Changed to " + central.State);
+//			//_stateChanged.Set();
+//		}
+
 		#endregion
+	}
+
+	public class CentralManagerDelegate : CBCentralManagerDelegate
+	{
+		bool scanned = false;
+
+		public override void UpdatedState(CBCentralManager central)
+		{
+			var state = central.State;
+			if (state == CBCentralManagerState.PoweredOn && !scanned)
+			{
+				var uuids = new List<CBUUID>();
+				central.ScanForPeripherals(uuids.ToArray());
+				scanned = true;
+			}
+		}
+
+		public override void DiscoveredPeripheral(CBCentralManager central, CBPeripheral peripheral, NSDictionary advertisementData, NSNumber RSSI)
+		{
+			Console.WriteLine("Found something");
+		}
 	}
 }
 

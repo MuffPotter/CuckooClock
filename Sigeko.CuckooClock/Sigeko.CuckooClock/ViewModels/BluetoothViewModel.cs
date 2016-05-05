@@ -62,9 +62,9 @@ namespace Sigeko.CuckooClock.ViewModels
 			IsScanning = true;
 			ProgressValue = 0;
 
-			_bluetoothService.DeviceConnected -= OnDeviceDiscovered;
+			_bluetoothService.DeviceConnected -= OnDeviceConnected;
 			_bluetoothService.DeviceDiscovered -= OnDeviceDiscovered;
-			_bluetoothService.DeviceConnected += OnDeviceDiscovered;
+			_bluetoothService.DeviceConnected += OnDeviceConnected;
 			_bluetoothService.DeviceDiscovered += OnDeviceDiscovered;
 
 			if ((string)parameter == "TEST")
@@ -73,7 +73,7 @@ namespace Sigeko.CuckooClock.ViewModels
 				_bluetoothService.StartScanning();
 		}
 
-		private void OnDeviceDiscovered(object sender, BluetoothService.DeviceEventArgs<IDevice> e)
+		private void OnDeviceDiscovered(object sender, BluetoothService.DeviceEventArgs<IDevice> eventArgs)
 		{
 			ProgressValue += .1;
 			DeviceList.Add(CreateDevice(null, DeviceList.Count));
@@ -100,7 +100,7 @@ namespace Sigeko.CuckooClock.ViewModels
 				return;
 			}
 
-			_bluetoothService.DeviceConnected -= OnDeviceDiscovered;
+			_bluetoothService.DeviceConnected -= OnDeviceConnected;
 			_bluetoothService.DeviceDiscovered -= OnDeviceDiscovered;
 			_bluetoothService.StopScanning();
 		}
@@ -122,7 +122,7 @@ namespace Sigeko.CuckooClock.ViewModels
 				return;
 			}
 
-			_bluetoothService.DeviceConnected -= OnDeviceDiscovered;
+			_bluetoothService.DeviceConnected -= OnDeviceConnected;
 			_bluetoothService.DeviceDiscovered -= OnDeviceDiscovered;
 			_bluetoothService.StopScanning();
 
@@ -169,6 +169,13 @@ namespace Sigeko.CuckooClock.ViewModels
 			return bluetoothDevices;
 		}
 
+
+		/// <summary>
+		/// Anker: 36f3eafd-0a84-852b-959c-6b0154b4a40e
+		/// </summary>
+		/// <param name="device"></param>
+		/// <param name="number"></param>
+		/// <returns></returns>
 		private BluetoothDevice CreateDevice(IDevice device, int number)
 		{
 			if (device == null)
