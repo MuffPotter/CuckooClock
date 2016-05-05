@@ -58,6 +58,8 @@ namespace Sigeko.CuckooClock.ViewModels
 				return;
 			}
 
+			DialogServices.ShowProcess("Geräte suchen", string.Empty);
+
 			DeviceList = new ObservableCollection<BluetoothDevice>();
 			IsScanning = true;
 			ProgressValue = 0;
@@ -182,8 +184,8 @@ namespace Sigeko.CuckooClock.ViewModels
 			{
 				return new BluetoothDevice
 				{
-					Id = Guid.NewGuid(),
-					Name = "Test " + DateTime.Now.ToString("T") + ": " + number,
+					Id = Guid.Empty,
+					Name = "Test Bluetooth Gerät",
 					ImageSource = "Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth@2x.png",
 					State = DeviceState.Disconnected,
 					SelectCommand = ConnectToDeviceCommand
@@ -195,7 +197,7 @@ namespace Sigeko.CuckooClock.ViewModels
 			return new BluetoothDevice
 			{
 				Id = device.Id,
-				Name = device.Name,
+				Name = string.IsNullOrEmpty(device.Name) ? "Bluetooth Gerät" : device.Name,
 				ImageSource = "Sigeko.CuckooClock.Assets.Images.Icons.Bluetooth@2x.png",
 				State = (DeviceState) device.State,
 				SelectCommand = ConnectToDeviceCommand

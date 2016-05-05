@@ -51,7 +51,7 @@ namespace Sigeko.CuckooClock.Services
 
 		public void StartScanning()
 		{
-			StartScanning(30);
+			StartScanning(300);
 		}
 
 		public void StartTestScanning()

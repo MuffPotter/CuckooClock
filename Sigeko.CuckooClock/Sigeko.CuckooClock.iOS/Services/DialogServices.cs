@@ -114,7 +114,8 @@ namespace Sigeko.CuckooClock.iOS.Services
 				message = titel + message;
 			}
 
-			BTProgressHUD.Show(message, maskType: ProgressHUD.MaskType.Gradient);
+			// BTProgressHUD.Show(message, maskType: ProgressHUD.MaskType.Gradient);
+			BTProgressHUD.Show("Abbrechen", null, message, maskType: ProgressHUD.MaskType.Gradient);
 		}
 
 		public void HideProcess()

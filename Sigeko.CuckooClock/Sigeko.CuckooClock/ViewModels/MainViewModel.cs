@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Sigeko.AppFramework.Commands;
-using Sigeko.AppFramework.ViewModels;
 using Sigeko.CuckooClock.Common;
 using Sigeko.CuckooClock.Services;
 
 namespace Sigeko.CuckooClock.ViewModels
 {
-	public partial class MainViewModel : ViewModelBase
+	public partial class MainViewModel : BaseViewModel
 	{
 		private bool _processing;
 
